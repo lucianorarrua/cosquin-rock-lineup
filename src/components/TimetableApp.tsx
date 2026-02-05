@@ -13,6 +13,7 @@ import {
   ChevronDownIcon,
   MessageCircleIcon
 } from './Icons';
+import Toast from './Toast';
 
 // The events arrive from Astro with ISO string dates, so we parse them
 interface SerializedEvent {
@@ -168,6 +169,7 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
   const [shareUrl, setShareUrl] = useState('');
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const selectedEvents = useMemo(
@@ -237,6 +239,7 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
     a.click();
     URL.revokeObjectURL(url);
     setIsExportMenuOpen(false);
+    setShowToast(true);
   }, [selectedEvents]);
 
   const handleGoogleCalendar = useCallback(() => {
@@ -249,8 +252,8 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
     a.download = 'cosquin-rock-2026.ics';
     a.click();
     URL.revokeObjectURL(url);
-    window.open('https://calendar.google.com/calendar/u/0/r/settings/export', '_blank');
     setIsExportMenuOpen(false);
+    setShowToast(true);
   }, [selectedEvents]);
 
   if (readOnly) {
@@ -262,7 +265,72 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
             Agenda compartida ({selectedIds.size} artistas)
           </span>
         </div>
-        <button onClick={onSwitchToEdit} className="btn-primary">
+
+        <div className="action-menus" ref={menuRef}>
+          <div className="menu-container">
+            <button 
+              className="btn-primary" 
+              onClick={() => {
+                setIsShareMenuOpen(!isShareMenuOpen);
+                setIsExportMenuOpen(false);
+              }}
+              aria-haspopup="true"
+              aria-expanded={isShareMenuOpen}
+            >
+              <ShareIcon />
+              Compartir
+              <ChevronDownIcon />
+            </button>
+
+            {isShareMenuOpen && (
+              <div className="dropdown-menu">
+                <button onClick={handleCopy} className="menu-item">
+                  {copied ? <CheckIcon /> : <CopyIcon />}
+                  {copied ? 'Copiado al portapapeles' : 'Copiar enlace'}
+                </button>
+                <button onClick={handleShareWhatsApp} className="menu-item">
+                  <MessageCircleIcon />
+                  Enviar por WhatsApp
+                </button>
+                <button onClick={handleShareX} className="menu-item">
+                  <XIcon />
+                  Compartir en X
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div className="menu-container">
+            <button 
+              className="btn-secondary" 
+              onClick={() => {
+                setIsExportMenuOpen(!isExportMenuOpen);
+                setIsShareMenuOpen(false);
+              }}
+              aria-haspopup="true"
+              aria-expanded={isExportMenuOpen}
+            >
+              <CalendarIcon />
+              Exportar
+              <ChevronDownIcon />
+            </button>
+
+            {isExportMenuOpen && (
+              <div className="dropdown-menu">
+                <button onClick={handleGoogleCalendar} className="menu-item">
+                  <GoogleIcon />
+                  Importar en Google Calendar
+                </button>
+                <button onClick={handleExportICS} className="menu-item">
+                  <DownloadIcon />
+                  Descargar archivo ICS
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <button onClick={onSwitchToEdit} className="btn-secondary">
           <EditIcon />
           Crear mi agenda
         </button>
@@ -350,6 +418,15 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
           )}
         </div>
       </div>
+
+      {showToast && (
+        <Toast
+          message="Calendario descargado!"
+          linkText="Ver cómo importarlo"
+          linkUrl="/faq"
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </div>
   );
 }

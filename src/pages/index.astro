@@ -45,14 +45,16 @@ const serializedSchedules = schedules.map(s => ({
 		<div class="app-container">
 			<!-- Header -->
 			<header class="header">
-				<img
-					src="/logo.webp"
-					alt="Cosquín Rock 2026"
-					class="header-logo"
-					width="200"
-					height="80"
-					loading="eager"
-				/>
+				<a href="/" class="header-logo-link">
+					<img
+						src="/logo.webp"
+						alt="Cosquín Rock 2026"
+						class="header-logo"
+						width="200"
+						height="80"
+						loading="eager"
+					/>
+				</a>
 				<p class="header-subtitle">Grilla de Horarios — 14 y 15 de Febrero 2026</p>
 				<p class="header-disclaimer">
 					Este no es el sitio oficial del Cosquín Rock.
@@ -76,6 +78,10 @@ const serializedSchedules = schedules.map(s => ({
 				<p>
 					<a href="https://github.com" target="_blank" rel="noopener noreferrer">
 						Código fuente en GitHub — ¡Contribuciones bienvenidas!
+					</a>
+					·
+					<a href="/faq" class="footer-link-subtle">
+						¿Cómo calculamos los horarios?
 					</a>
 				</p>
 			</footer>
