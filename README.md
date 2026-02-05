@@ -146,7 +146,7 @@ git push origin feature/tu-idea
 
 ## 📧 Contacto
 
-Desarrollado con 🎸 para la comunidad del rock.
+Desarrollado con 🎸 para la comunidad del Cosquín Rock.
 
 ---
 
