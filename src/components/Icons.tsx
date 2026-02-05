@@ -101,3 +101,33 @@ export const GoogleIcon = (props: IconProps) => (
     <path d="M8 18h8" />
   </IconBase>
 );
+
+export const ClockIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+  </IconBase>
+);
+
+export const MapPinIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+  </IconBase>
+);
+
+export const FilterIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+  </IconBase>
+);
+
+export const ListIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <line x1="8" x2="21" y1="6" y2="6"/><line x1="8" x2="21" y1="12" y2="12"/><line x1="8" x2="21" y1="18" y2="18"/><line x1="3" x2="3.01" y1="6" y2="6"/><line x1="3" x2="3.01" y1="12" y2="12"/><line x1="3" x2="3.01" y1="18" y2="18"/>
+  </IconBase>
+);
+
+export const GridIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>
+  </IconBase>
+);
