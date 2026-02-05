@@ -1,17 +1,84 @@
 ---
+import '../styles/global.css';
+import { getDaySchedules } from '../lib/data';
+import TimetableApp from '../components/TimetableApp';
 
+const schedules = getDaySchedules();
+
+// Serialize to plain objects for hydration (Date objects don't survive serialization)
+const serializedSchedules = schedules.map(s => ({
+  ...s,
+  stages: s.stages.map(st => ({
+    ...st,
+    events: st.events.map(e => ({
+      ...e,
+      startAt: e.startAt.toISOString(),
+      endAt: e.endAt.toISOString(),
+    })),
+  })),
+}));
 ---
 
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Cosquín Rock 2026 — Grilla de Horarios</title>
+		<meta name="description" content="Grilla de horarios del Cosquín Rock 2026. Armá tu agenda personalizada, compartila con amigos y exportá a Google Calendar." />
+		<meta name="theme-color" content="#0a0a0f" />
+
+		<!-- Open Graph -->
+		<meta property="og:title" content="Cosquín Rock 2026 — Grilla de Horarios" />
+		<meta property="og:description" content="Armá tu agenda personalizada para el Cosquín Rock 2026. ¡Compartila con tus amigos!" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="/logo.webp" />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Cosquín Rock 2026 — Grilla de Horarios" />
+		<meta name="twitter:description" content="Armá tu agenda personalizada para el Cosquín Rock 2026." />
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<div class="app-container">
+			<!-- Header -->
+			<header class="header">
+				<img
+					src="/logo.webp"
+					alt="Cosquín Rock 2026"
+					class="header-logo"
+					width="200"
+					height="80"
+					loading="eager"
+				/>
+				<p class="header-subtitle">Grilla de Horarios — 14 y 15 de Febrero 2026</p>
+				<p class="header-disclaimer">
+					Este no es el sitio oficial del Cosquín Rock.
+					<a href="https://cosquinrock.net/" target="_blank" rel="noopener noreferrer">
+						Visitá el sitio oficial →
+					</a>
+				</p>
+			</header>
+
+			<!-- Main Content (React Island) -->
+			<main>
+				<TimetableApp client:load schedules={serializedSchedules} />
+			</main>
+
+			<!-- Footer -->
+			<footer class="footer">
+				<p>
+					Hecho con 🎸 para la comunidad del rock —
+					Datos del <a href="https://cosquinrock.net/" target="_blank" rel="noopener noreferrer">Cosquín Rock Oficial</a>
+				</p>
+				<p>
+					<a href="https://github.com" target="_blank" rel="noopener noreferrer">
+						Código fuente en GitHub — ¡Contribuciones bienvenidas!
+					</a>
+				</p>
+			</footer>
+		</div>
 	</body>
 </html>
