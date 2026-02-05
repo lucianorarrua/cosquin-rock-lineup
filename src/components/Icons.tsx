@@ -1,0 +1,103 @@
+import React from 'react';
+
+type IconProps = {
+  size?: number | string;
+  className?: string;
+  strokeWidth?: number;
+};
+
+const IconBase = ({ size = 16, className = '', children, viewBox = "0 0 24 24", strokeWidth = 2 }: IconProps & { children: React.ReactNode, viewBox?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox={viewBox} 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth={strokeWidth} 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+    className={className}
+    style={{ flexShrink: 0 }}
+  >
+    {children}
+  </svg>
+);
+
+export const CopyIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+  </IconBase>
+);
+
+export const CheckIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M20 6 9 17l-5-5"/>
+  </IconBase>
+);
+
+export const ShareIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" x2="12" y1="2" y2="15"/>
+  </IconBase>
+);
+
+export const TwitterIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+  </IconBase>
+);
+
+export const CalendarIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/>
+  </IconBase>
+);
+
+export const DownloadIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/>
+  </IconBase>
+);
+
+export const ChevronDownIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="m6 9 6 6 6-6"/>
+  </IconBase>
+);
+
+export const CloseIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+  </IconBase>
+);
+
+export const EditIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/>
+  </IconBase>
+);
+
+export const MessageCircleIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+  </IconBase>
+);
+
+export const XIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <path d="M4 4l16 16"/>
+    <path d="M20 4L4 20"/>
+  </IconBase>
+);
+
+export const GoogleIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+    <path d="M16 2v4" />
+    <path d="M8 2v4" />
+    <path d="M3 10h18" />
+    <path d="M8 14h8" />
+    <path d="M8 18h8" />
+  </IconBase>
+);

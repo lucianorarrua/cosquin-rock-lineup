@@ -1,6 +1,18 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import type { FestivalEvent } from '../lib/types';
 import { generateGoogleCalendarUrl, generateICS, getEventLocalTime } from '../lib/data';
+import { 
+  CopyIcon, 
+  ShareIcon, 
+  XIcon,
+  CalendarIcon, 
+  CheckIcon, 
+  GoogleIcon, 
+  DownloadIcon, 
+  EditIcon,
+  ChevronDownIcon,
+  MessageCircleIcon
+} from './Icons';
 
 // The events arrive from Astro with ISO string dates, so we parse them
 interface SerializedEvent {
@@ -95,7 +107,10 @@ function EventBlock({ event, isSelected, readOnly, onToggle, gridStartMinute }: 
       tabIndex={0}
       disabled={readOnly}
     >
-      <span className="event-artist">{event.artist}</span>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%' }}>
+        <span className="event-artist">{event.artist}</span>
+        {isSelected && <div style={{ flexShrink: 0, opacity: 0.8 }}><CheckIcon size={14} /></div>}
+      </div>
       {height >= 40 && (
         <span className="event-time">
           {startTime} - {endTime}
@@ -106,7 +121,7 @@ function EventBlock({ event, isSelected, readOnly, onToggle, gridStartMinute }: 
 }
 
 function formatHour(normalizedMin: number): string {
-  const totalMin = normalizedMin + 14 * 60; // add back grid base (14:00)
+  const totalMin = normalizedMin + 13 * 60; // add back grid base (14:00)
   const h = Math.floor(totalMin / 60) % 24;
   const m = totalMin % 60;
   return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
@@ -122,6 +137,7 @@ function TimeAxis({ startMinute, endMinute }: TimeAxisProps) {
   for (let m = startMinute; m <= endMinute; m += 60) {
     hours.push(m);
   }
+  const LABEL_OFFSET = 8;
 
   return (
     <>
@@ -129,7 +145,7 @@ function TimeAxis({ startMinute, endMinute }: TimeAxisProps) {
         <div
           key={m}
           className="time-label"
-          style={{ top: `${(m - startMinute) * PX_PER_MINUTE}px` }}
+          style={{ top: `${(m - startMinute) * PX_PER_MINUTE + LABEL_OFFSET}px` }}
         >
           {formatHour(m)}
         </div>
@@ -150,6 +166,10 @@ interface ActionPanelProps {
 function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: ActionPanelProps) {
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState('');
+  const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
+  const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
   const selectedEvents = useMemo(
     () => allEvents.filter((e) => selectedIds.has(e.id)),
     [allEvents, selectedIds]
@@ -163,11 +183,24 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
     setShareUrl(url.toString());
   }, [selectedIds]);
 
+  // Click outside to close menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsShareMenuOpen(false);
+        setIsExportMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const handleCopy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      setIsShareMenuOpen(false);
     } catch {
       const ta = document.createElement('textarea');
       ta.value = shareUrl;
@@ -177,18 +210,21 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
       document.body.removeChild(ta);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      setIsShareMenuOpen(false);
     }
   }, [shareUrl]);
 
   const handleShareWhatsApp = useCallback(() => {
     const text = encodeURIComponent(`¡Mirá mi agenda para el Cosquín Rock 2026! 🎸🔥\n${shareUrl}`);
     window.open(`https://wa.me/?text=${text}`, '_blank');
+    setIsShareMenuOpen(false);
   }, [shareUrl]);
 
-  const handleShareTwitter = useCallback(() => {
+  const handleShareX = useCallback(() => {
     const text = encodeURIComponent(`¡Mi agenda para el Cosquín Rock 2026! 🎸🔥`);
     const url = encodeURIComponent(shareUrl);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+    setIsShareMenuOpen(false);
   }, [shareUrl]);
 
   const handleExportICS = useCallback(() => {
@@ -200,6 +236,7 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
     a.download = 'cosquin-rock-2026.ics';
     a.click();
     URL.revokeObjectURL(url);
+    setIsExportMenuOpen(false);
   }, [selectedEvents]);
 
   const handleGoogleCalendar = useCallback(() => {
@@ -207,16 +244,21 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
     for (const ev of selectedEvents) {
       window.open(generateGoogleCalendarUrl(ev), '_blank');
     }
+    setIsExportMenuOpen(false);
   }, [selectedEvents]);
 
   if (readOnly) {
     return (
       <div className="action-panel">
-        <span className="action-panel-text">
-          📋 Estás viendo una agenda compartida ({selectedIds.size} artistas)
-        </span>
-        <button onClick={onSwitchToEdit} className="action-btn action-btn--edit">
-          ✏️ Crear mi agenda
+        <div className="action-status">
+          <div className="status-indicator active" />
+          <span className="action-panel-text">
+            Agenda compartida ({selectedIds.size} artistas)
+          </span>
+        </div>
+        <button onClick={onSwitchToEdit} className="btn-primary">
+          <EditIcon />
+          Crear mi agenda
         </button>
       </div>
     );
@@ -225,32 +267,82 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
   if (selectedIds.size === 0) {
     return (
       <div className="action-panel-hint">
-        <p>👆 Tocá los artistas para armar tu agenda personalizada</p>
+        <p>Seleccioná los artistas en la grilla para armar tu recorrido.</p>
       </div>
     );
   }
 
   return (
     <div className="action-panel">
-      <span className="action-panel-text">
-        🎵 {selectedIds.size} artista{selectedIds.size !== 1 ? 's' : ''}
-      </span>
-      <div className="action-buttons">
-        <button onClick={handleCopy} className="action-btn action-btn--copy" aria-label="Copiar enlace">
-          {copied ? '✅ Copiado' : '🔗 Copiar enlace'}
-        </button>
-        <button onClick={handleShareWhatsApp} className="action-btn action-btn--whatsapp" aria-label="Compartir por WhatsApp">
-          💬 WhatsApp
-        </button>
-        <button onClick={handleShareTwitter} className="action-btn action-btn--twitter" aria-label="Compartir en Twitter">
-          🐦 Twitter
-        </button>
-        <button onClick={handleGoogleCalendar} className="action-btn action-btn--gcal" aria-label="Agregar a Google Calendar">
-          📅 Google Cal
-        </button>
-        <button onClick={handleExportICS} className="action-btn action-btn--ics" aria-label="Descargar archivo ICS">
-          📥 .ics
-        </button>
+      <div className="action-status">
+        <div className="status-indicator active" />
+        <span className="action-panel-text">
+          {selectedIds.size} artista{selectedIds.size !== 1 ? 's' : ''} seleccionados
+        </span>
+      </div>
+
+      <div className="action-menus" ref={menuRef}>
+        <div className="menu-container">
+          <button 
+            className="btn-primary" 
+            onClick={() => {
+              setIsShareMenuOpen(!isShareMenuOpen);
+              setIsExportMenuOpen(false);
+            }}
+            aria-haspopup="true"
+            aria-expanded={isShareMenuOpen}
+          >
+            <ShareIcon />
+            Compartir
+            <ChevronDownIcon />
+          </button>
+
+          {isShareMenuOpen && (
+            <div className="dropdown-menu">
+              <button onClick={handleCopy} className="menu-item">
+                {copied ? <CheckIcon /> : <CopyIcon />}
+                {copied ? 'Copiado al portapapeles' : 'Copiar enlace'}
+              </button>
+              <button onClick={handleShareWhatsApp} className="menu-item">
+                <MessageCircleIcon />
+                Enviar por WhatsApp
+              </button>
+              <button onClick={handleShareX} className="menu-item">
+                <XIcon />
+                Compartir en X
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="menu-container">
+          <button 
+            className="btn-secondary" 
+            onClick={() => {
+              setIsExportMenuOpen(!isExportMenuOpen);
+              setIsShareMenuOpen(false);
+            }}
+            aria-haspopup="true"
+            aria-expanded={isExportMenuOpen}
+          >
+            <CalendarIcon />
+            Exportar
+            <ChevronDownIcon />
+          </button>
+
+          {isExportMenuOpen && (
+            <div className="dropdown-menu">
+              <button onClick={handleGoogleCalendar} className="menu-item">
+                <GoogleIcon />
+                Agregar a Google Calendar
+              </button>
+              <button onClick={handleExportICS} className="menu-item">
+                <DownloadIcon />
+                Descargar archivo ICS
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -371,9 +463,10 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
             <div key={stage.name} className="stage-column">
               {/* Sticky stage header */}
               <div className="stage-header">
-                <span className="stage-header-text" data-stage={stage.name}>
-                  {stage.name}
-                </span>
+                <div className="stage-header-inner" data-stage={stage.name}>
+                  <span className="stage-label-small">Escenario</span>
+                  <span className="stage-label-large">{stage.name}</span>
+                </div>
               </div>
 
               {/* Events container */}
@@ -407,7 +500,11 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
       {/* Selected artists summary */}
       {selectedIds.size > 0 && (
         <div className="selected-summary">
-          <h3 className="selected-title">🎸 Tu agenda ({selectedIds.size})</h3>
+          <h3 className="selected-title">
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+               <CheckIcon /> Tu agenda ({selectedIds.size})
+            </span>
+          </h3>
           <div className="selected-tags">
             {allEvents
               .filter((e) => selectedIds.has(e.id))
