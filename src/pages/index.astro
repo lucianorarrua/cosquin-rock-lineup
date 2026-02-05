@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { getDaySchedules } from '../lib/data';
 import TimetableApp from '../components/TimetableApp';
+import Footer from '../components/Footer.astro';
 
 const schedules = getDaySchedules();
 
@@ -70,21 +71,7 @@ const serializedSchedules = schedules.map(s => ({
 			</main>
 
 			<!-- Footer -->
-			<footer class="footer">
-				<p>
-					Hecho con 🎸 para la comunidad del Cosquín Rock —
-					Datos del <a href="https://cosquinrock.net/" target="_blank" rel="noopener noreferrer">Cosquín Rock Oficial</a>
-				</p>
-				<p>
-					<a href="https://github.com" target="_blank" rel="noopener noreferrer">
-						Código fuente en GitHub — ¡Contribuciones bienvenidas!
-					</a>
-					·
-					<a href="/faq" class="footer-link-subtle">
-						¿Cómo calculamos los horarios?
-					</a>
-				</p>
-			</footer>
+			<Footer />
 		</div>
 	</body>
 </html>
