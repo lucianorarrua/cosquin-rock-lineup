@@ -12,6 +12,12 @@ import Footer from '../components/Footer.astro';
 		<title>Preguntas Frecuentes — Cosquín Rock 2026</title>
 		<meta name="description" content="Preguntas frecuentes sobre cómo usar tu agenda personalizada del Cosquín Rock 2026." />
 		<meta name="theme-color" content="#0a0a0f" />
+
+		<!-- PWA Manifest -->
+		<link rel="manifest" href="/manifest.json" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-title" content="Cosquín Rock" />
 	</head>
 	<body>
 		<div class="app-container">
@@ -111,5 +117,8 @@ import Footer from '../components/Footer.astro';
 			<!-- Footer -->
 			<Footer />
 		</div>
+
+		<!-- Service Worker Registration (async, non-blocking) -->
+		<script src="/register-sw.js" defer></script>
 	</body>
 </html>

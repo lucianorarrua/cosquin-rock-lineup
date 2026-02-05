@@ -12,11 +12,13 @@ Una aplicación web estática y optimizada para organizar tu agenda personalizad
   - 📥 Archivo `.ics` para Outlook, Apple Calendar, etc.
 - **Modo lectura** — revisa agendas compartidas en modo solo lectura
 - **Optimizado para bajo ancho de banda** — <250 KB total, sin fuentes externas
+- **Funciona sin conexión** — PWA con Service Worker, sirve contenido cacheado cuando no hay red
 - **Diseño responsive** — mobile-first, funciona en cualquier dispositivo
 
 ## 🚀 Levantar el Proyecto
 
 ### Requisitos previos
+
 - Node.js 16+ instalado
 - `pnpm` instalado (`npm install -g pnpm`)
 
@@ -64,6 +66,9 @@ src/
 
 public/
 ├── logo.webp              # Logo del Cosquín Rock
+├── manifest.json          # Web App Manifest (PWA)
+├── sw.js                  # Service Worker (offline support)
+├── register-sw.js         # SW registration script
 └── [assets estáticos]
 
 data.json                  # Base de datos de artistas y horarios
@@ -109,6 +114,7 @@ data.json                  # Base de datos de artistas y horarios
 ## 📝 Datos
 
 El archivo `data.json` contiene todos los artistas, escenarios y horarios. Incluye:
+
 - `artist` — Nombre del artista
 - `day` / `dia` — Día del festival (1 o 2)
 - `stage` — Escenario (Norte, Sur, Montaña, etc.)

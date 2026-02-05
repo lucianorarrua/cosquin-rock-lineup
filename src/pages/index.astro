@@ -31,6 +31,12 @@ const serializedSchedules = schedules.map(s => ({
 		<meta name="description" content="Grilla de horarios del Cosquín Rock 2026. Armá tu agenda personalizada, compartila con amigos y exportá a Google Calendar." />
 		<meta name="theme-color" content="#0a0a0f" />
 
+		<!-- PWA Manifest -->
+		<link rel="manifest" href="/manifest.json" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-title" content="Cosquín Rock" />
+
 		<!-- Open Graph -->
 		<meta property="og:title" content="Cosquín Rock 2026 — Grilla de Horarios" />
 		<meta property="og:description" content="Armá tu agenda personalizada para el Cosquín Rock 2026. ¡Compartila con tus amigos!" />
@@ -73,5 +79,8 @@ const serializedSchedules = schedules.map(s => ({
 			<!-- Footer -->
 			<Footer />
 		</div>
+
+		<!-- Service Worker Registration (async, non-blocking) -->
+		<script src="/register-sw.js" defer></script>
 	</body>
 </html>
