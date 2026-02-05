@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import type { FestivalEvent } from '../lib/types';
-import { generateGoogleCalendarUrl, generateICS, getEventLocalTime } from '../lib/data';
+import { generateICS, getEventLocalTime } from '../lib/data';
 import { 
   CopyIcon, 
   ShareIcon, 
@@ -241,9 +241,15 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
 
   const handleGoogleCalendar = useCallback(() => {
     if (selectedEvents.length === 0) return;
-    for (const ev of selectedEvents) {
-      window.open(generateGoogleCalendarUrl(ev), '_blank');
-    }
+    const ics = generateICS(selectedEvents);
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'cosquin-rock-2026.ics';
+    a.click();
+    URL.revokeObjectURL(url);
+    window.open('https://calendar.google.com/calendar/u/0/r/settings/export', '_blank');
     setIsExportMenuOpen(false);
   }, [selectedEvents]);
 
@@ -334,7 +340,7 @@ function ActionPanel({ selectedIds, allEvents, readOnly, onSwitchToEdit }: Actio
             <div className="dropdown-menu">
               <button onClick={handleGoogleCalendar} className="menu-item">
                 <GoogleIcon />
-                Agregar a Google Calendar
+                Importar en Google Calendar
               </button>
               <button onClick={handleExportICS} className="menu-item">
                 <DownloadIcon />
