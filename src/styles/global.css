@@ -237,54 +237,42 @@ main {
   color: var(--color-text-muted);
 }
 
-/* Toggle Filter Button */
-.btn-toggle-filter {
+/* Toggle Filter Group */
+.filter-toggle-group {
   display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.875rem;
-  margin-left: auto;
   background: var(--color-surface-alt);
   border: 1px solid var(--color-border);
   border-radius: 2rem;
+  padding: 4px;
+  margin-left: auto;
+}
+
+.filter-toggle-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
   color: var(--color-text-muted);
   font-size: 0.8rem;
   font-weight: 600;
+  padding: 0.375rem 1rem;
+  border-radius: 1.5rem;
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
 }
 
-.btn-toggle-filter:hover {
-  background: var(--color-border);
+.filter-toggle-option:hover {
   color: var(--color-text);
-  border-color: var(--color-border-light);
 }
 
-.btn-toggle-filter--active {
-  background: var(--color-accent-dim);
-  border-color: var(--color-accent);
+.filter-toggle-option--active {
+  background: var(--color-surface);
   color: var(--color-accent);
-}
-
-.btn-toggle-filter--active:hover {
-  background: rgba(234, 179, 8, 0.25);
-  border-color: var(--color-accent-hover);
-  color: var(--color-accent-hover);
-}
-
-.btn-toggle-filter__text {
-  display: inline;
-}
-
-@media (max-width: 480px) {
-  .btn-toggle-filter__text {
-    display: none;
-  }
-  
-  .btn-toggle-filter {
-    padding: 0.5rem;
-  }
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: 700;
 }
 
 @media (max-width: 640px) {
@@ -294,11 +282,16 @@ main {
     width: 100%;
   }
   
-  .btn-toggle-filter {
+  .filter-toggle-group {
     margin-left: 0;
     margin-top: 0.5rem;
+    width: 100%;
+    display: flex;
+  }
+  
+  .filter-toggle-option {
     flex: 1;
-    justify-content: center;
+    padding: 0.5rem;
   }
 }
 

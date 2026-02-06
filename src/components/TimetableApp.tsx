@@ -19,7 +19,6 @@ import {
   GridIcon,
   ImageIcon,
   InstagramIcon,
-  EyeIcon,
   EyeOffIcon,
 } from './Icons';
 import Toast from './Toast';
@@ -461,21 +460,22 @@ function ActionPanel({
           {selectedIds.size} artista{selectedIds.size !== 1 ? 's' : ''}{' '}
           seleccionado{selectedIds.size !== 1 ? 's' : ''}
         </span>
-        <button
-          className={`btn-toggle-filter ${showOnlySelected ? 'btn-toggle-filter--active' : ''}`}
-          onClick={onToggleShowOnlySelected}
-          aria-pressed={showOnlySelected}
-          title={
-            showOnlySelected
-              ? 'Ver todos los artistas'
-              : 'Ver solo seleccionados'
-          }
-        >
-          {showOnlySelected ? <EyeIcon size={16} /> : <EyeOffIcon size={16} />}
-          <span className="btn-toggle-filter__text">
-            {showOnlySelected ? 'Ver todos' : 'Solo mi agenda'}
-          </span>
-        </button>
+        <div className="filter-toggle-group">
+          <button
+            className={`filter-toggle-option ${!showOnlySelected ? 'filter-toggle-option--active' : ''}`}
+            onClick={() => showOnlySelected && onToggleShowOnlySelected()}
+            aria-pressed={!showOnlySelected}
+          >
+            Todos
+          </button>
+          <button
+            className={`filter-toggle-option ${showOnlySelected ? 'filter-toggle-option--active' : ''}`}
+            onClick={() => !showOnlySelected && onToggleShowOnlySelected()}
+            aria-pressed={showOnlySelected}
+          >
+            Mi Agenda
+          </button>
+        </div>
       </div>
 
       <div className="action-menus" ref={menuRef}>
