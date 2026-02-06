@@ -258,14 +258,15 @@ const AgendaImagePreview = forwardRef<HTMLDivElement, AgendaImagePreviewProps>(
                                 fontSize: '13px',
                                 fontWeight: '700',
                                 color: '#fff',
-                                marginBottom: '4px',
+                                marginBottom: '6px',
                               }}
                             >
                               {event.artist}
                             </div>
                             <div
                               style={{
-                                fontSize: '11px',
+                                fontSize: '13px',
+                                fontWeight: '600',
                                 color: '#8a8a96',
                               }}
                             >
