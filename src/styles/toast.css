@@ -39,6 +39,11 @@
   color: var(--color-accent);
 }
 
+.toast-icon--warning {
+  background: rgba(234, 179, 8, 0.15);
+  color: #eab308;
+}
+
 .toast-content {
   flex: 1;
   display: flex;

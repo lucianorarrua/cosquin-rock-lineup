@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { CheckIcon, XIcon } from './Icons';
+import { CheckIcon, AlertTriangleIcon, XIcon } from './Icons';
 
 interface ToastProps {
   message: string;
   linkText?: string;
   linkUrl?: string;
   duration?: number;
+  type?: 'success' | 'warning';
   onClose: () => void;
 }
 
@@ -14,6 +15,7 @@ export default function Toast({
   linkText,
   linkUrl,
   duration = 5000,
+  type = 'success',
   onClose,
 }: ToastProps) {
   const [isVisible, setIsVisible] = useState(true);
@@ -34,8 +36,14 @@ export default function Toast({
 
   return (
     <div className={`toast ${isVisible ? 'toast-visible' : 'toast-hidden'}`}>
-      <div className="toast-icon">
-        <CheckIcon size={20} />
+      <div
+        className={`toast-icon${type === 'warning' ? ' toast-icon--warning' : ''}`}
+      >
+        {type === 'warning' ? (
+          <AlertTriangleIcon size={20} />
+        ) : (
+          <CheckIcon size={20} />
+        )}
       </div>
       <div className="toast-content">
         <p className="toast-message">{message}</p>
