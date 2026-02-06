@@ -19,6 +19,19 @@ import AgendaImagePreview from './AgendaImagePreview';
 
 type ProcessingState = 'idle' | 'sharing' | 'downloading';
 
+interface ToastInfo {
+  message: string;
+  type: 'success' | 'warning';
+  linkText?: string;
+  linkUrl?: string;
+}
+
+function isInstagramWebView(): boolean {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent || '';
+  return /Instagram/i.test(ua);
+}
+
 interface ShareMenuProps {
   isOpen: boolean;
   onToggle: () => void;
@@ -148,7 +161,7 @@ export function ActionPanel({
   const [shareUrl, setShareUrl] = useState('');
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+  const [toastInfo, setToastInfo] = useState<ToastInfo | null>(null);
   const [processingState, setProcessingState] =
     useState<ProcessingState>('idle');
   const menuRef = useRef<HTMLDivElement>(null);
@@ -160,6 +173,7 @@ export function ActionPanel({
   );
 
   const shareText = '¡Mirá mi agenda para el Cosquín Rock 2026! 🎸🔥';
+  const shareTitle = 'Mi agenda Cosquín Rock 2026';
 
   // ─── Effects ───────────────────────────────────────────────────────
 
@@ -221,7 +235,12 @@ export function ActionPanel({
     a.click();
     URL.revokeObjectURL(url);
     setIsExportMenuOpen(false);
-    setShowToast(true);
+    setToastInfo({
+      message: 'Calendario descargado!',
+      type: 'success',
+      linkText: 'Ver cómo importarlo',
+      linkUrl: '/faq',
+    });
   }, [selectedEvents]);
 
   const generateAgendaImage = useCallback(async (): Promise<Blob | null> => {
@@ -252,6 +271,16 @@ export function ActionPanel({
 
   const handleExportImage = useCallback(async () => {
     if (selectedEvents.length === 0) return;
+
+    if (isInstagramWebView()) {
+      setToastInfo({
+        message:
+          'Instagram bloquea las descargas. Abrí el sitio en Chrome o Safari para guardar la imagen.',
+        type: 'warning',
+      });
+      setIsExportMenuOpen(false);
+      return;
+    }
 
     setProcessingState('downloading');
     setIsExportMenuOpen(false);
@@ -293,14 +322,33 @@ export function ActionPanel({
       }
 
       await navigator.share({
-        title: 'Mi agenda Cosquín Rock 2026',
+        title: shareTitle,
         text: shareText,
         url: shareUrl,
         files: [file],
       });
     } catch (error) {
-      if (!(error instanceof DOMException && error.name === 'AbortError')) {
-        console.error('Error sharing:', error);
+      if (error instanceof DOMException && error.name === 'AbortError') return;
+
+      // Plan B: share without image
+      try {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+        setToastInfo({
+          message:
+            'No se pudo adjuntar la imagen, pero se compartió el enlace.',
+          type: 'warning',
+        });
+      } catch (fallbackError) {
+        if (
+          fallbackError instanceof DOMException &&
+          fallbackError.name === 'AbortError'
+        )
+          return;
+        console.error('Error sharing:', fallbackError);
       }
     } finally {
       setProcessingState('idle');
@@ -403,12 +451,13 @@ export function ActionPanel({
 
       {actionMenus}
 
-      {showToast && (
+      {toastInfo && (
         <Toast
-          message="Calendario descargado!"
-          linkText="Ver cómo importarlo"
-          linkUrl="/faq"
-          onClose={() => setShowToast(false)}
+          message={toastInfo.message}
+          type={toastInfo.type}
+          linkText={toastInfo.linkText}
+          linkUrl={toastInfo.linkUrl}
+          onClose={() => setToastInfo(null)}
         />
       )}
 
