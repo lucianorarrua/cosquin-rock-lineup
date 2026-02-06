@@ -823,6 +823,7 @@ interface TimetableAppProps {
 }
 
 export default function TimetableApp({ schedules }: TimetableAppProps) {
+  const [mounted, setMounted] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [readOnly, setReadOnly] = useState(false);
   const [showOnlySelected, setShowOnlySelected] = useState(false);
@@ -834,12 +835,18 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
   const showMobileView =
     viewMode === 'list' || (viewMode === 'auto' && isMobile);
 
+  // Ensure component is mounted on client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Hydrate from URL on mount
   useEffect(() => {
+    if (!mounted) return;
     setSelectedIds(getSelectedIdsFromURL());
     setReadOnly(isReadOnlyFromURL());
     setShowOnlySelected(isShowOnlySelectedFromURL());
-  }, []);
+  }, [mounted]);
 
   // Sync to URL on change
   useEffect(() => {
@@ -921,6 +928,24 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
     }
     return lines;
   }, [currentSchedule.startMinute, currentSchedule.endMinute]);
+
+  // Don't render until mounted to avoid hydration issues
+  if (!mounted) {
+    return (
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '100vw',
+          minHeight: '400px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <p style={{ color: '#888' }}>Cargando grilla...</p>
+      </div>
+    );
+  }
 
   return (
     <div style={{ width: '100%', maxWidth: '100vw' }}>

@@ -97,7 +97,7 @@ const serializedSchedules = schedules.map((s) => ({
 
       <!-- Main Content (React Island) -->
       <main>
-        <TimetableApp client:load schedules={serializedSchedules} />
+        <TimetableApp client:only="react" schedules={serializedSchedules} />
       </main>
 
       <!-- Footer -->
