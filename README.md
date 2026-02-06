@@ -1,6 +1,6 @@
-# Cosquín Rock 2026 — Grilla de Horarios
+# Cosquín Rock® 2026 — Grilla de Horarios
 
-Una aplicación web estática y optimizada para organizar tu agenda personalizada del **Cosquín Rock 2026** (14 y 15 de febrero).
+Una aplicación web estática y optimizada para organizar tu agenda personalizada del **Cosquín Rock® 2026** (14 y 15 de febrero).
 
 ## 🎸 Características
 
@@ -65,7 +65,7 @@ src/
     └── index.astro        # Página principal (SSR header/footer + React)
 
 public/
-├── logo.webp              # Logo del Cosquín Rock
+├── logo.webp              # Logo del Cosquín Rock®
 ├── manifest.json          # Web App Manifest (PWA)
 ├── sw.js                  # Service Worker (offline support)
 ├── register-sw.js         # SW registration script
@@ -132,9 +132,9 @@ El archivo `data.json` contiene todos los artistas, escenarios y horarios. Inclu
 
 ## 📜 Licencia
 
-Este proyecto es una herramienta comunitaria **no oficial** del Cosquín Rock.
+Este proyecto es una herramienta comunitaria **no oficial** del Cosquín Rock®.
 
-Datos y conceptos del festival: [Cosquín Rock Oficial](https://cosquinrock.net/)
+Datos y conceptos del festival: [Cosquín Rock® Oficial](https://cosquinrock.net/)
 
 ## 🤝 Contribuciones
 
@@ -152,8 +152,8 @@ git push origin feature/tu-idea
 
 ## 📧 Contacto
 
-Desarrollado con 🎸 para la comunidad del Cosquín Rock.
+Desarrollado con 🎸 para la comunidad del Cosquín Rock®.
 
 ---
 
-**Disclaimer**: Este no es el sitio oficial del Cosquín Rock. Visita [cosquinrock.net](https://cosquinrock.net/) para información oficial del festival.
+**Disclaimer**: Este no es el sitio oficial del Cosquín Rock®. Visita [cosquinrock.net](https://cosquinrock.net/) para información oficial del festival.

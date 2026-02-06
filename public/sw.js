@@ -1,5 +1,5 @@
 /**
- * Service Worker para Cosquín Rock 2026
+ * Service Worker para Cosquín Rock® 2026
  * Estrategia: Stale-While-Revalidate (Cache-First con actualización en segundo plano)
  *
  * Objetivo: Funcionar en entornos con redes muy limitadas o sin conexión.
@@ -173,7 +173,7 @@ async function staleWhileRevalidate(request) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sin conexión — Cosquín Rock 2026</title>
+  <title>Sin conexión — Cosquín Rock® 2026</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {

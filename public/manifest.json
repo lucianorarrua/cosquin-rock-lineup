@@ -1,7 +1,7 @@
 {
-  "name": "Cosquín Rock 2026 — Grilla de Horarios",
-  "short_name": "Cosquín Rock",
-  "description": "Grilla de horarios del Cosquín Rock 2026. Armá tu agenda personalizada, compartila con amigos y exportá a Google Calendar.",
+  "name": "Cosquín Rock® 2026 — Grilla de Horarios",
+  "short_name": "Cosquín Rock®",
+  "description": "Grilla de horarios del Cosquín Rock® 2026. Armá tu agenda personalizada, compartila con amigos y exportá a Google Calendar.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0f",

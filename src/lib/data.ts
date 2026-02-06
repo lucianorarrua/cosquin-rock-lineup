@@ -176,9 +176,9 @@ export function generateICS(events: FestivalEvent[]): string {
       'BEGIN:VEVENT',
       `DTSTART:${formatDateForGCal(event.startAt)}`,
       `DTEND:${formatDateForGCal(event.endAt)}`,
-      `SUMMARY:${event.artist} - Cosquín Rock 2026`,
-      `LOCATION:Escenario ${event.stage}\\, Cosquín Rock\\, Córdoba\\, Argentina`,
-      `DESCRIPTION:${event.artist} en el escenario ${event.stage} del Cosquín Rock 2026.`,
+      `SUMMARY:${event.artist} - Cosquín Rock® 2026`,
+      `LOCATION:Escenario ${event.stage}\\, Cosquín Rock®\\, Córdoba\\, Argentina`,
+      `DESCRIPTION:${event.artist} en el escenario ${event.stage} del Cosquín Rock® 2026.`,
       `UID:${event.id}@cosquin-rock-lineup`,
       'END:VEVENT'
     );

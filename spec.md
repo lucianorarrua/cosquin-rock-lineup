@@ -2,7 +2,7 @@
 Act as a Senior Frontend Engineer specialized in High-Performance Static Sites and PWAs.
 
 **Objective:**
-Build a highly optimized, static web application for a music festival ("Cosquín Rock 2026") timetable. The app must handle low-network environments effectively.
+Build a highly optimized, static web application for a music festival ("Cosquín Rock® 2026") timetable. The app must handle low-network environments effectively.
 
 **Tech Stack:**
 
@@ -73,7 +73,7 @@ I will provide an array `data.json`. Each object contains:
 - Ensure keyboard navigability and screen reader compatibility.
 - Provide visual feedback on interactions (e.g., highlighting selected artists).
 - Responsive design for mobile and desktop devices (mainly mobile-first).
-- Logo and branding consistent with Cosquín Rock aesthetics.
+- Logo and branding consistent with Cosquín Rock® aesthetics.
 - Logo resource is available in `resources\logo.webp`
-- Clarify that it is not the official website of Cosquín Rock and include a link to the official Cosquín Rock website: `https://cosquinrock.net/`
-- Footer with credits: "Developed by [Your Name] - Data from Cosquín Rock Official". Link to repository for contributions.
+- Clarify that it is not the official website of Cosquín Rock® and include a link to the official Cosquín Rock® website: `https://cosquinrock.net/`
+- Footer with credits: "Developed by [Your Name] - Data from Cosquín Rock® Official". Link to repository for contributions.
