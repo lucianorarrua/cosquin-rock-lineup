@@ -41,7 +41,9 @@ export function ActionPanel({
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
-  const [isExportingImage, setIsExportingImage] = useState(false);
+  const [processingState, setProcessingState] = useState<
+    'idle' | 'sharing' | 'downloading'
+  >('idle');
   const menuRef = useRef<HTMLDivElement>(null);
   const agendaImageRef = useRef<HTMLDivElement>(null);
 
@@ -50,10 +52,7 @@ export function ActionPanel({
     [allEvents, selectedIds]
   );
 
-  const shareText = useMemo(
-    () => `¡Mirá mi agenda para el Cosquín Rock 2026! 🎸🔥\n${shareUrl}`,
-    [shareUrl]
-  );
+  const shareText = '¡Mirá mi agenda para el Cosquín Rock 2026! 🎸🔥';
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -140,7 +139,7 @@ export function ActionPanel({
   const handleExportImage = useCallback(async () => {
     if (selectedEvents.length === 0) return;
 
-    setIsExportingImage(true);
+    setProcessingState('downloading');
     setIsExportMenuOpen(false);
 
     try {
@@ -150,14 +149,14 @@ export function ActionPanel({
     } catch (error) {
       console.error('Error generating image:', error);
     } finally {
-      setIsExportingImage(false);
+      setProcessingState('idle');
     }
   }, [selectedEvents, generateAgendaImage, downloadAgendaImage]);
 
   const handleNativeShare = useCallback(async () => {
     if (selectedEvents.length === 0) return;
 
-    setIsExportingImage(true);
+    setProcessingState('sharing');
     setIsShareMenuOpen(false);
 
     try {
@@ -193,7 +192,7 @@ export function ActionPanel({
         console.error('Error sharing:', error);
       }
     } finally {
-      setIsExportingImage(false);
+      setProcessingState('idle');
     }
   }, [
     selectedEvents,
@@ -224,9 +223,18 @@ export function ActionPanel({
               aria-haspopup="true"
               aria-expanded={isShareMenuOpen}
             >
-              <ShareIcon />
-              Compartir
-              <ChevronDownIcon />
+              {processingState === 'sharing' ? (
+                <>
+                  <ShareIcon />
+                  Generando...
+                </>
+              ) : (
+                <>
+                  <ShareIcon />
+                  Compartir
+                  <ChevronDownIcon />
+                </>
+              )}
             </button>
 
             {isShareMenuOpen && (
@@ -238,10 +246,12 @@ export function ActionPanel({
                 <button
                   onClick={handleNativeShare}
                   className="menu-item"
-                  disabled={isExportingImage}
+                  disabled={processingState !== 'idle'}
                 >
                   <ShareIcon />
-                  {isExportingImage ? 'Generando...' : 'Compartir con imagen'}
+                  {processingState === 'sharing'
+                    ? 'Generando...'
+                    : 'Compartir con imagen'}
                 </button>
               </div>
             )}
@@ -257,9 +267,18 @@ export function ActionPanel({
               aria-haspopup="true"
               aria-expanded={isExportMenuOpen}
             >
-              <CalendarIcon />
-              Exportar
-              <ChevronDownIcon />
+              {processingState === 'downloading' ? (
+                <>
+                  <CalendarIcon />
+                  Generando...
+                </>
+              ) : (
+                <>
+                  <CalendarIcon />
+                  Exportar
+                  <ChevronDownIcon />
+                </>
+              )}
             </button>
 
             {isExportMenuOpen && (
@@ -267,10 +286,12 @@ export function ActionPanel({
                 <button
                   onClick={handleExportImage}
                   className="menu-item"
-                  disabled={isExportingImage}
+                  disabled={processingState !== 'idle'}
                 >
                   <ImageIcon />
-                  {isExportingImage ? 'Generando...' : 'Descargar imagen'}
+                  {processingState === 'downloading'
+                    ? 'Generando...'
+                    : 'Descargar imagen'}
                 </button>
                 <button onClick={handleExportICS} className="menu-item">
                   <DownloadIcon />
@@ -341,9 +362,18 @@ export function ActionPanel({
             aria-haspopup="true"
             aria-expanded={isShareMenuOpen}
           >
-            <ShareIcon />
-            Compartir
-            <ChevronDownIcon />
+            {processingState === 'sharing' ? (
+              <>
+                <ShareIcon />
+                Generando...
+              </>
+            ) : (
+              <>
+                <ShareIcon />
+                Compartir
+                <ChevronDownIcon />
+              </>
+            )}
           </button>
 
           {isShareMenuOpen && (
@@ -355,10 +385,12 @@ export function ActionPanel({
               <button
                 onClick={handleNativeShare}
                 className="menu-item"
-                disabled={isExportingImage}
+                disabled={processingState !== 'idle'}
               >
                 <ShareIcon />
-                {isExportingImage ? 'Generando...' : 'Compartir con imagen'}
+                {processingState === 'sharing'
+                  ? 'Generando...'
+                  : 'Compartir con imagen'}
               </button>
             </div>
           )}
@@ -374,9 +406,18 @@ export function ActionPanel({
             aria-haspopup="true"
             aria-expanded={isExportMenuOpen}
           >
-            <CalendarIcon />
-            Exportar
-            <ChevronDownIcon />
+            {processingState === 'downloading' ? (
+              <>
+                <CalendarIcon />
+                Generando...
+              </>
+            ) : (
+              <>
+                <CalendarIcon />
+                Exportar
+                <ChevronDownIcon />
+              </>
+            )}
           </button>
 
           {isExportMenuOpen && (
@@ -384,10 +425,12 @@ export function ActionPanel({
               <button
                 onClick={handleExportImage}
                 className="menu-item"
-                disabled={isExportingImage}
+                disabled={processingState !== 'idle'}
               >
                 <ImageIcon />
-                {isExportingImage ? 'Generando...' : 'Descargar imagen'}
+                {processingState === 'downloading'
+                  ? 'Generando...'
+                  : 'Descargar imagen'}
               </button>
               <button onClick={handleExportICS} className="menu-item">
                 <DownloadIcon />
