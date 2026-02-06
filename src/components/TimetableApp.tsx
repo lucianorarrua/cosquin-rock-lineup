@@ -8,7 +8,6 @@ import {
   XIcon,
   CalendarIcon,
   CheckIcon,
-  GoogleIcon,
   DownloadIcon,
   EditIcon,
   ChevronDownIcon,
@@ -19,6 +18,7 @@ import {
   ListIcon,
   GridIcon,
   ImageIcon,
+  InstagramIcon,
 } from './Icons';
 import Toast from './Toast';
 import AgendaImagePreview from './AgendaImagePreview';
@@ -278,21 +278,15 @@ function ActionPanel({
     setIsShareMenuOpen(false);
   }, [shareUrl]);
 
-  const handleExportICS = useCallback(() => {
-    const ics = generateICS(selectedEvents);
-    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'cosquin-rock-2026.ics';
-    a.click();
-    URL.revokeObjectURL(url);
-    setIsExportMenuOpen(false);
-    setShowToast(true);
-  }, [selectedEvents]);
+  const handleShareInstagram = useCallback(() => {
+    const text = encodeURIComponent(
+      `¡Mirá mi agenda para el Cosquín Rock 2026! 🎸🔥\n${shareUrl}`
+    );
+    window.open(`https://instagram.com/direct/new/?text=${text}`, '_blank');
+    setIsShareMenuOpen(false);
+  }, [shareUrl]);
 
-  const handleGoogleCalendar = useCallback(() => {
-    if (selectedEvents.length === 0) return;
+  const handleExportICS = useCallback(() => {
     const ics = generateICS(selectedEvents);
     const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
     const url = URL.createObjectURL(blob);
@@ -369,6 +363,10 @@ function ActionPanel({
                   <MessageCircleIcon />
                   Enviar por WhatsApp
                 </button>
+                <button onClick={handleShareInstagram} className="menu-item">
+                  <InstagramIcon />
+                  Enviar por Instagram
+                </button>
                 <button onClick={handleShareX} className="menu-item">
                   <XIcon />
                   Compartir en X
@@ -394,14 +392,6 @@ function ActionPanel({
 
             {isExportMenuOpen && (
               <div className="dropdown-menu">
-                <button onClick={handleGoogleCalendar} className="menu-item">
-                  <GoogleIcon />
-                  Importar en Google Calendar
-                </button>
-                <button onClick={handleExportICS} className="menu-item">
-                  <DownloadIcon />
-                  Descargar archivo ICS
-                </button>
                 <button
                   onClick={handleExportImage}
                   className="menu-item"
@@ -409,6 +399,10 @@ function ActionPanel({
                 >
                   <ImageIcon />
                   {isExportingImage ? 'Generando...' : 'Descargar imagen'}
+                </button>
+                <button onClick={handleExportICS} className="menu-item">
+                  <DownloadIcon />
+                  Descargar archivo ICS
                 </button>
               </div>
             )}
@@ -474,6 +468,10 @@ function ActionPanel({
                 <MessageCircleIcon />
                 Enviar por WhatsApp
               </button>
+              <button onClick={handleShareInstagram} className="menu-item">
+                <InstagramIcon />
+                Enviar por Instagram
+              </button>
               <button onClick={handleShareX} className="menu-item">
                 <XIcon />
                 Compartir en X
@@ -499,14 +497,6 @@ function ActionPanel({
 
           {isExportMenuOpen && (
             <div className="dropdown-menu">
-              <button onClick={handleGoogleCalendar} className="menu-item">
-                <GoogleIcon />
-                Importar en Google Calendar
-              </button>
-              <button onClick={handleExportICS} className="menu-item">
-                <DownloadIcon />
-                Descargar archivo ICS
-              </button>
               <button
                 onClick={handleExportImage}
                 className="menu-item"
@@ -514,6 +504,10 @@ function ActionPanel({
               >
                 <ImageIcon />
                 {isExportingImage ? 'Generando...' : 'Descargar imagen'}
+              </button>
+              <button onClick={handleExportICS} className="menu-item">
+                <DownloadIcon />
+                Descargar archivo ICS
               </button>
             </div>
           )}

@@ -165,3 +165,11 @@ export const ImageIcon = (props: IconProps) => (
     <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
   </IconBase>
 );
+
+export const InstagramIcon = (props: IconProps) => (
+  <IconBase {...props}>
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="currentColor" />
+    <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" />
+  </IconBase>
+);
