@@ -1,0 +1,12 @@
+---
+// Vercel Analytics component for Astro
+// This injects the analytics script that tracks page views automatically
+---
+
+<script>
+  import { inject } from '@vercel/analytics';
+
+  // Initialize Vercel Analytics
+  // It automatically tracks page views and web vitals
+  inject();
+</script>

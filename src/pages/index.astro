@@ -3,6 +3,7 @@ import '../styles/global.css';
 import { getDaySchedules } from '../lib/data';
 import TimetableApp from '../components/TimetableApp';
 import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
 
 const schedules = getDaySchedules();
 
@@ -65,6 +66,9 @@ const serializedSchedules = schedules.map((s) => ({
       name="twitter:description"
       content="Armá tu agenda personalizada para el Cosquín Rock® 2026."
     />
+
+    <!-- Vercel Analytics -->
+    <Analytics />
   </head>
   <body>
     <div class="app-container">

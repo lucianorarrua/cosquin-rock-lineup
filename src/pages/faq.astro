@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
+import Analytics from '../components/Analytics.astro';
 ---
 
 <html lang="es">
@@ -24,6 +25,9 @@ import Footer from '../components/Footer.astro';
       content="black-translucent"
     />
     <meta name="apple-mobile-web-app-title" content="Cosquín Rock®" />
+
+    <!-- Vercel Analytics -->
+    <Analytics />
   </head>
   <body>
     <div class="app-container">
