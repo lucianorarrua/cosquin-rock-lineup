@@ -40,29 +40,18 @@ function normalizeMinutes(minutes: number): number {
   return minutes - GRID_START_MINUTES;
 }
 
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-}
-
 function parseEvents(): FestivalEvent[] {
   return (rawData as RawEvent[]).map((raw) => {
-    const day = raw.day ?? raw.dia ?? 1;
     const startAt = new Date(raw.startAt);
     const endAt = new Date(raw.endAt);
     const startMinutes = normalizeMinutes(utcToLocalMinutes(startAt));
     const endMinutes = normalizeMinutes(utcToLocalMinutes(endAt));
     const duration = endMinutes - startMinutes;
-    const id = slugify(raw.artist) + '-d' + day;
 
     return {
-      id,
+      id: raw.id,
       artist: raw.artist,
-      day,
+      day: raw.day,
       stage: raw.stage,
       startAt,
       endAt,

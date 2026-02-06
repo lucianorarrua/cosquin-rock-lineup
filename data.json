@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "artist": "KILL FLORA",
     "day": 1,
     "stage": "Norte",
@@ -7,6 +8,7 @@
     "endAt": "2026-02-14T18:05:00Z"
   },
   {
+    "id": "2",
     "artist": "ERUCA SATIVA",
     "day": 1,
     "stage": "Norte",
@@ -14,6 +16,7 @@
     "endAt": "2026-02-14T19:10:00Z"
   },
   {
+    "id": "3",
     "artist": "EL ZAR",
     "day": 1,
     "stage": "Norte",
@@ -21,6 +24,7 @@
     "endAt": "2026-02-14T20:30:00Z"
   },
   {
+    "id": "4",
     "artist": "TURF",
     "day": 1,
     "stage": "Norte",
@@ -28,6 +32,7 @@
     "endAt": "2026-02-14T22:05:00Z"
   },
   {
+    "id": "5",
     "artist": "DILLOM",
     "day": 1,
     "stage": "Norte",
@@ -35,6 +40,7 @@
     "endAt": "2026-02-14T23:50:00Z"
   },
   {
+    "id": "6",
     "artist": "BABASONICOS",
     "day": 1,
     "stage": "Norte",
@@ -42,6 +48,7 @@
     "endAt": "2026-02-15T01:50:00Z"
   },
   {
+    "id": "7",
     "artist": "LALI",
     "day": 1,
     "stage": "Norte",
@@ -49,6 +56,7 @@
     "endAt": "2026-02-15T03:10:00Z"
   },
   {
+    "id": "8",
     "artist": "CALIGARIS",
     "day": 1,
     "stage": "Norte",
@@ -56,6 +64,7 @@
     "endAt": "2026-02-15T04:40:00Z"
   },
   {
+    "id": "9",
     "artist": "FANTASMAGORÍA",
     "day": 1,
     "stage": "Sur",
@@ -63,6 +72,7 @@
     "endAt": "2026-02-14T18:05:00Z"
   },
   {
+    "id": "10",
     "artist": "LA MISSISSIPPI",
     "day": 1,
     "stage": "Sur",
@@ -70,6 +80,7 @@
     "endAt": "2026-02-14T19:10:00Z"
   },
   {
+    "id": "11",
     "artist": "EMI",
     "day": 1,
     "stage": "Sur",
@@ -77,6 +88,7 @@
     "endAt": "2026-02-14T20:30:00Z"
   },
   {
+    "id": "12",
     "artist": "CRUZANDO EL CHARCO",
     "day": 1,
     "stage": "Sur",
@@ -84,6 +96,7 @@
     "endAt": "2026-02-14T22:15:00Z"
   },
   {
+    "id": "13",
     "artist": "CIRO Y LOS PERSAS",
     "day": 1,
     "stage": "Sur",
@@ -91,6 +104,7 @@
     "endAt": "2026-02-15T00:10:00Z"
   },
   {
+    "id": "14",
     "artist": "LA VELA PUERCA",
     "day": 1,
     "stage": "Sur",
@@ -98,6 +112,7 @@
     "endAt": "2026-02-15T01:50:00Z"
   },
   {
+    "id": "15",
     "artist": "LAS PELOTAS",
     "day": 1,
     "stage": "Sur",
@@ -105,6 +120,7 @@
     "endAt": "2026-02-15T03:10:00Z"
   },
   {
+    "id": "16",
     "artist": "VIEJAS LOCAS / JÓVENES PORDIOSEROS",
     "day": 1,
     "stage": "Sur",
@@ -112,6 +128,7 @@
     "endAt": "2026-02-15T04:40:00Z"
   },
   {
+    "id": "17",
     "artist": "CHECHI DE MARCOS",
     "day": 1,
     "stage": "Montaña",
@@ -119,6 +136,7 @@
     "endAt": "2026-02-14T17:45:00Z"
   },
   {
+    "id": "18",
     "artist": "RYAN",
     "day": 1,
     "stage": "Montaña",
@@ -126,6 +144,7 @@
     "endAt": "2026-02-14T18:35:00Z"
   },
   {
+    "id": "19",
     "artist": "BERSUIT VERGARABAT",
     "day": 1,
     "stage": "Montaña",
@@ -133,6 +152,7 @@
     "endAt": "2026-02-14T19:50:00Z"
   },
   {
+    "id": "20",
     "artist": "MARILINA BERTOLDI",
     "day": 1,
     "stage": "Montaña",
@@ -140,6 +160,7 @@
     "endAt": "2026-02-14T21:15:00Z"
   },
   {
+    "id": "21",
     "artist": "EL KUELGUE",
     "day": 1,
     "stage": "Montaña",
@@ -147,6 +168,7 @@
     "endAt": "2026-02-14T23:10:00Z"
   },
   {
+    "id": "22",
     "artist": "CUARTETO DE NOS",
     "day": 1,
     "stage": "Montaña",
@@ -154,6 +176,7 @@
     "endAt": "2026-02-15T01:10:00Z"
   },
   {
+    "id": "23",
     "artist": "FRANZ FERDINAND",
     "day": 1,
     "stage": "Montaña",
@@ -161,6 +184,7 @@
     "endAt": "2026-02-15T02:40:00Z"
   },
   {
+    "id": "24",
     "artist": "THE CHEMICAL BROTHERS (DJ SET)",
     "day": 1,
     "stage": "Montaña",
@@ -168,6 +192,7 @@
     "endAt": "2026-02-15T04:45:00Z"
   },
   {
+    "id": "25",
     "artist": "VICTORIA WHYNOT",
     "day": 1,
     "stage": "Montaña",
@@ -175,6 +200,7 @@
     "endAt": "2026-02-15T06:00:00Z"
   },
   {
+    "id": "26",
     "artist": "MICROTUL",
     "day": 1,
     "stage": "Boomerang",
@@ -182,6 +208,7 @@
     "endAt": "2026-02-14T17:40:00Z"
   },
   {
+    "id": "27",
     "artist": "1915",
     "day": 1,
     "stage": "Boomerang",
@@ -189,6 +216,7 @@
     "endAt": "2026-02-14T18:25:00Z"
   },
   {
+    "id": "28",
     "artist": "UN MUERTO MAS",
     "day": 1,
     "stage": "Boomerang",
@@ -196,6 +224,7 @@
     "endAt": "2026-02-14T19:15:00Z"
   },
   {
+    "id": "29",
     "artist": "GIRL ULTRA",
     "day": 1,
     "stage": "Boomerang",
@@ -203,6 +232,7 @@
     "endAt": "2026-02-14T20:05:00Z"
   },
   {
+    "id": "30",
     "artist": "HERMANOS GUTIÉRREZ",
     "day": 1,
     "stage": "Boomerang",
@@ -210,6 +240,7 @@
     "endAt": "2026-02-14T21:05:00Z"
   },
   {
+    "id": "31",
     "artist": "INDIOS",
     "day": 1,
     "stage": "Boomerang",
@@ -217,6 +248,7 @@
     "endAt": "2026-02-14T22:05:00Z"
   },
   {
+    "id": "32",
     "artist": "ESTELARES",
     "day": 1,
     "stage": "Boomerang",
@@ -224,6 +256,7 @@
     "endAt": "2026-02-14T23:20:00Z"
   },
   {
+    "id": "33",
     "artist": "ABEL PINTOS",
     "day": 1,
     "stage": "Boomerang",
@@ -231,6 +264,7 @@
     "endAt": "2026-02-15T00:30:00Z"
   },
   {
+    "id": "34",
     "artist": "LA FRANELA",
     "day": 1,
     "stage": "Boomerang",
@@ -238,6 +272,7 @@
     "endAt": "2026-02-15T01:50:00Z"
   },
   {
+    "id": "35",
     "artist": "COTI",
     "day": 1,
     "stage": "Boomerang",
@@ -245,6 +280,7 @@
     "endAt": "2026-02-15T03:10:00Z"
   },
   {
+    "id": "36",
     "artist": "AMIGO DE ARTISTAS",
     "day": 1,
     "stage": "Boomerang",
@@ -252,6 +288,7 @@
     "endAt": "2026-02-15T04:30:00Z"
   },
   {
+    "id": "37",
     "artist": "GOLO'S BAND",
     "day": 1,
     "stage": "La Casita del Blues",
@@ -259,6 +296,7 @@
     "endAt": "2026-02-14T17:50:00Z"
   },
   {
+    "id": "38",
     "artist": "LOS MENTIDORES",
     "day": 1,
     "stage": "La Casita del Blues",
@@ -266,6 +304,7 @@
     "endAt": "2026-02-14T18:40:00Z"
   },
   {
+    "id": "39",
     "artist": "LAS WITCHES",
     "day": 1,
     "stage": "La Casita del Blues",
@@ -273,6 +312,7 @@
     "endAt": "2026-02-14T19:35:00Z"
   },
   {
+    "id": "40",
     "artist": "LE DRACS",
     "day": 1,
     "stage": "La Casita del Blues",
@@ -280,6 +320,7 @@
     "endAt": "2026-02-14T20:30:00Z"
   },
   {
+    "id": "41",
     "artist": "PERRO SUIZO",
     "day": 1,
     "stage": "La Casita del Blues",
@@ -287,6 +328,7 @@
     "endAt": "2026-02-14T21:25:00Z"
   },
   {
+    "id": "42",
     "artist": "MISTY SOUL CHOIR",
     "day": 1,
     "stage": "La Casita del Blues",
@@ -294,6 +336,7 @@
     "endAt": "2026-02-14T22:20:00Z"
   },
   {
+    "id": "43",
     "artist": "TANGO & ROLL",
     "day": 1,
     "stage": "La Casita del Blues",
@@ -301,6 +344,7 @@
     "endAt": "2026-02-14T23:15:00Z"
   },
   {
+    "id": "44",
     "artist": "WAYRA IGLESIAS",
     "day": 1,
     "stage": "La Casita del Blues",
@@ -308,6 +352,7 @@
     "endAt": "2026-02-15T00:10:00Z"
   },
   {
+    "id": "45",
     "artist": "LOS ESPIRITUS",
     "day": 1,
     "stage": "La Casita del Blues",
@@ -315,6 +360,7 @@
     "endAt": "2026-02-15T01:15:00Z"
   },
   {
+    "id": "46",
     "artist": "PITI FERNANDEZ",
     "day": 1,
     "stage": "La Casita del Blues",
@@ -322,6 +368,7 @@
     "endAt": "2026-02-15T02:20:00Z"
   },
   {
+    "id": "47",
     "artist": "LES DIABOLETTES",
     "day": 1,
     "stage": "La Casita del Blues",
@@ -329,6 +376,7 @@
     "endAt": "2026-02-15T03:35:00Z"
   },
   {
+    "id": "48",
     "artist": "CLAUDIO RICCI",
     "day": 1,
     "stage": "La Plaza Electronic Stage",
@@ -336,6 +384,7 @@
     "endAt": "2026-02-14T20:00:00Z"
   },
   {
+    "id": "49",
     "artist": "VALENTIN HUEDO B2B BRUZ",
     "day": 1,
     "stage": "La Plaza Electronic Stage",
@@ -343,6 +392,7 @@
     "endAt": "2026-02-14T22:00:00Z"
   },
   {
+    "id": "50",
     "artist": "LEHAR B2B SANTIAGO GARCÍA",
     "day": 1,
     "stage": "La Plaza Electronic Stage",
@@ -350,6 +400,7 @@
     "endAt": "2026-02-15T00:00:00Z"
   },
   {
+    "id": "51",
     "artist": "SORÄ",
     "day": 1,
     "stage": "La Plaza Electronic Stage",
@@ -357,6 +408,7 @@
     "endAt": "2026-02-15T01:30:00Z"
   },
   {
+    "id": "52",
     "artist": "ARKADYAN",
     "day": 1,
     "stage": "La Plaza Electronic Stage",
@@ -364,6 +416,7 @@
     "endAt": "2026-02-15T03:00:00Z"
   },
   {
+    "id": "53",
     "artist": "FALSED",
     "day": 1,
     "stage": "Sorpresa",
@@ -371,6 +424,7 @@
     "endAt": "2026-02-14T19:30:00Z"
   },
   {
+    "id": "54",
     "artist": "SORPRESA",
     "day": 1,
     "stage": "Sorpresa",
@@ -378,6 +432,7 @@
     "endAt": "2026-02-14T22:40:00Z"
   },
   {
+    "id": "55",
     "artist": "SORPRESA",
     "day": 1,
     "stage": "Sorpresa",
@@ -385,407 +440,465 @@
     "endAt": "2026-02-15T02:20:00Z"
   },
   {
+    "id": "56",
     "artist": "SOFI MORA",
-    "dia": 2,
+    "day": 2,
     "stage": "Norte",
     "startAt": "2026-02-15T17:30:00Z",
     "endAt": "2026-02-15T18:05:00Z"
   },
   {
+    "id": "57",
     "artist": "BLAIR",
-    "dia": 2,
+    "day": 2,
     "stage": "Norte",
     "startAt": "2026-02-15T18:20:00Z",
     "endAt": "2026-02-15T19:10:00Z"
   },
   {
+    "id": "58",
     "artist": "GAUCHITO CLUB",
-    "dia": 2,
+    "day": 2,
     "stage": "Norte",
     "startAt": "2026-02-15T19:30:00Z",
     "endAt": "2026-02-15T20:30:00Z"
   },
   {
+    "id": "59",
     "artist": "BANDALOS CHINOS",
-    "dia": 2,
+    "day": 2,
     "stage": "Norte",
     "startAt": "2026-02-15T20:50:00Z",
     "endAt": "2026-02-15T21:50:00Z"
   },
   {
+    "id": "60",
     "artist": "FITO PAEZ",
-    "dia": 2,
+    "day": 2,
     "stage": "Norte",
     "startAt": "2026-02-15T22:10:00Z",
     "endAt": "2026-02-15T23:35:00Z"
   },
   {
+    "id": "61",
     "artist": "AIRBAG",
-    "dia": 2,
+    "day": 2,
     "stage": "Norte",
     "startAt": "2026-02-15T23:55:00Z",
     "endAt": "2026-02-16T01:25:00Z"
   },
   {
+    "id": "62",
     "artist": "YSY A",
-    "dia": 2,
+    "day": 2,
     "stage": "Norte",
     "startAt": "2026-02-16T02:00:00Z",
     "endAt": "2026-02-16T02:55:00Z"
   },
   {
+    "id": "63",
     "artist": "CARAS EXTRAÑAS",
-    "dia": 2,
+    "day": 2,
     "stage": "Norte",
     "startAt": "2026-02-16T03:20:00Z",
     "endAt": "2026-02-16T04:20:00Z"
   },
   {
+    "id": "64",
     "artist": "AINDA",
-    "dia": 2,
+    "day": 2,
     "stage": "Sur",
     "startAt": "2026-02-15T17:20:00Z",
     "endAt": "2026-02-15T17:55:00Z"
   },
   {
+    "id": "65",
     "artist": "KAPANGA",
-    "dia": 2,
+    "day": 2,
     "stage": "Sur",
     "startAt": "2026-02-15T18:10:00Z",
     "endAt": "2026-02-15T19:05:00Z"
   },
   {
+    "id": "66",
     "artist": "PAPPO X JUANSE",
-    "dia": 2,
+    "day": 2,
     "stage": "Sur",
     "startAt": "2026-02-15T19:25:00Z",
     "endAt": "2026-02-15T20:25:00Z"
   },
   {
+    "id": "67",
     "artist": "EL PLAN DE LA MARIPOSA",
-    "dia": 2,
+    "day": 2,
     "stage": "Sur",
     "startAt": "2026-02-15T20:45:00Z",
     "endAt": "2026-02-15T22:10:00Z"
   },
   {
+    "id": "68",
     "artist": "DIVIDIDOS",
-    "dia": 2,
+    "day": 2,
     "stage": "Sur",
     "startAt": "2026-02-15T22:40:00Z",
     "endAt": "2026-02-16T00:00:00Z"
   },
   {
+    "id": "69",
     "artist": "TRUENO",
-    "dia": 2,
+    "day": 2,
     "stage": "Sur",
     "startAt": "2026-02-16T00:30:00Z",
     "endAt": "2026-02-16T01:40:00Z"
   },
   {
+    "id": "70",
     "artist": "GUASONES",
-    "dia": 2,
+    "day": 2,
     "stage": "Sur",
     "startAt": "2026-02-16T02:10:00Z",
     "endAt": "2026-02-16T03:20:00Z"
   },
   {
+    "id": "71",
     "artist": "LOUTA",
-    "dia": 2,
+    "day": 2,
     "stage": "Sur",
     "startAt": "2026-02-16T03:50:00Z",
     "endAt": "2026-02-16T04:50:00Z"
   },
   {
+    "id": "72",
     "artist": "RENZO LEALI",
-    "dia": 2,
+    "day": 2,
     "stage": "Montaña",
     "startAt": "2026-02-15T17:30:00Z",
     "endAt": "2026-02-15T17:55:00Z"
   },
   {
+    "id": "73",
     "artist": "BEATS MODERNOS",
-    "dia": 2,
+    "day": 2,
     "stage": "Montaña",
     "startAt": "2026-02-15T18:00:00Z",
     "endAt": "2026-02-15T18:35:00Z"
   },
   {
+    "id": "74",
     "artist": "GUSTAVO CORDERA",
-    "dia": 2,
+    "day": 2,
     "stage": "Montaña",
     "startAt": "2026-02-15T18:50:00Z",
     "endAt": "2026-02-15T19:40:00Z"
   },
   {
+    "id": "75",
     "artist": "LOS PERICOS",
-    "dia": 2,
+    "day": 2,
     "stage": "Montaña",
     "startAt": "2026-02-15T20:00:00Z",
     "endAt": "2026-02-15T21:10:00Z"
   },
   {
+    "id": "76",
     "artist": "SILVESTRE Y LA NARANJA",
-    "dia": 2,
+    "day": 2,
     "stage": "Montaña",
     "startAt": "2026-02-15T21:30:00Z",
     "endAt": "2026-02-15T22:50:00Z"
   },
   {
+    "id": "77",
     "artist": "MORAT",
-    "dia": 2,
+    "day": 2,
     "stage": "Montaña",
     "startAt": "2026-02-15T23:20:00Z",
     "endAt": "2026-02-16T00:50:00Z"
   },
   {
+    "id": "78",
     "artist": "LAS PASTILLAS DEL ABUELO",
-    "dia": 2,
+    "day": 2,
     "stage": "Montaña",
     "startAt": "2026-02-16T01:20:00Z",
     "endAt": "2026-02-16T02:40:00Z"
   },
   {
+    "id": "79",
     "artist": "PECES RAROS",
-    "dia": 2,
+    "day": 2,
     "stage": "Montaña",
     "startAt": "2026-02-16T03:00:00Z",
     "endAt": "2026-02-16T03:50:00Z"
   },
   {
+    "id": "80",
     "artist": "MARIANO MELLINO",
-    "dia": 2,
+    "day": 2,
     "stage": "Montaña",
     "startAt": "2026-02-16T04:00:00Z",
     "endAt": "2026-02-16T05:00:00Z"
   },
   {
+    "id": "81",
     "artist": "FRANKY WAH",
-    "dia": 2,
+    "day": 2,
     "stage": "Montaña",
     "startAt": "2026-02-16T05:00:00Z",
     "endAt": "2026-02-16T06:30:00Z"
   },
   {
+    "id": "82",
     "artist": "WANDA JAEL",
-    "dia": 2,
+    "day": 2,
     "stage": "Paraguay",
     "startAt": "2026-02-15T17:20:00Z",
     "endAt": "2026-02-15T17:55:00Z"
   },
   {
+    "id": "83",
     "artist": "T&K",
-    "dia": 2,
+    "day": 2,
     "stage": "Paraguay",
     "startAt": "2026-02-15T18:10:00Z",
     "endAt": "2026-02-15T18:55:00Z"
   },
   {
+    "id": "84",
     "artist": "MALANDRO",
-    "dia": 2,
+    "day": 2,
     "stage": "Paraguay",
     "startAt": "2026-02-15T19:10:00Z",
     "endAt": "2026-02-15T20:05:00Z"
   },
   {
+    "id": "85",
     "artist": "GAUCHOS OF THE PAMPA",
-    "dia": 2,
+    "day": 2,
     "stage": "Paraguay",
     "startAt": "2026-02-15T20:20:00Z",
     "endAt": "2026-02-15T21:05:00Z"
   },
   {
+    "id": "86",
     "artist": "DEVENDRA BANHART",
-    "dia": 2,
+    "day": 2,
     "stage": "Paraguay",
     "startAt": "2026-02-15T21:20:00Z",
     "endAt": "2026-02-15T22:15:00Z"
   },
   {
+    "id": "87",
     "artist": "DUM CHICA",
-    "dia": 2,
+    "day": 2,
     "stage": "Paraguay",
     "startAt": "2026-02-15T22:30:00Z",
     "endAt": "2026-02-15T23:15:00Z"
   },
   {
+    "id": "88",
     "artist": "MARKY RAMONE",
-    "dia": 2,
+    "day": 2,
     "stage": "Paraguay",
     "startAt": "2026-02-15T23:30:00Z",
     "endAt": "2026-02-16T00:20:00Z"
   },
   {
+    "id": "89",
     "artist": "DAVID ELLEFSON",
-    "dia": 2,
+    "day": 2,
     "stage": "Paraguay",
     "startAt": "2026-02-16T00:35:00Z",
     "endAt": "2026-02-16T01:20:00Z"
   },
   {
+    "id": "90",
     "artist": "CTM",
-    "dia": 2,
+    "day": 2,
     "stage": "Paraguay",
     "startAt": "2026-02-16T01:35:00Z",
     "endAt": "2026-02-16T02:20:00Z"
   },
   {
+    "id": "91",
     "artist": "SIX SEX",
-    "dia": 2,
+    "day": 2,
     "stage": "Paraguay",
     "startAt": "2026-02-16T02:35:00Z",
     "endAt": "2026-02-16T03:30:00Z"
   },
   {
+    "id": "92",
     "artist": "EL CLUB DE LA SERPIENTE",
-    "dia": 2,
+    "day": 2,
     "stage": "Paraguay",
     "startAt": "2026-02-16T03:45:00Z",
     "endAt": "2026-02-16T05:00:00Z"
   },
   {
+    "id": "93",
     "artist": "ROSY GOMEEZ",
-    "dia": 2,
+    "day": 2,
     "stage": "La Casita del Blues",
     "startAt": "2026-02-15T17:15:00Z",
     "endAt": "2026-02-15T17:50:00Z"
   },
   {
+    "id": "94",
     "artist": "LABIOS DE SAL",
-    "dia": 2,
+    "day": 2,
     "stage": "La Casita del Blues",
     "startAt": "2026-02-15T18:05:00Z",
     "endAt": "2026-02-15T18:40:00Z"
   },
   {
+    "id": "95",
     "artist": "RUDY",
-    "dia": 2,
+    "day": 2,
     "stage": "La Casita del Blues",
     "startAt": "2026-02-15T18:55:00Z",
     "endAt": "2026-02-15T19:35:00Z"
   },
   {
+    "id": "96",
     "artist": "BULLDOZER BLUES BAND",
-    "dia": 2,
+    "day": 2,
     "stage": "La Casita del Blues",
     "startAt": "2026-02-15T19:50:00Z",
     "endAt": "2026-02-15T20:30:00Z"
   },
   {
+    "id": "97",
     "artist": "CORDELIA'S BLUES",
-    "dia": 2,
+    "day": 2,
     "stage": "La Casita del Blues",
     "startAt": "2026-02-15T20:45:00Z",
     "endAt": "2026-02-15T21:25:00Z"
   },
   {
+    "id": "98",
     "artist": "GRASSHOPPER'S",
-    "dia": 2,
+    "day": 2,
     "stage": "La Casita del Blues",
     "startAt": "2026-02-15T21:40:00Z",
     "endAt": "2026-02-15T22:20:00Z"
   },
   {
+    "id": "99",
     "artist": "GISA LONDERO & TOYO BAGOSO",
-    "dia": 2,
+    "day": 2,
     "stage": "La Casita del Blues",
     "startAt": "2026-02-15T22:35:00Z",
     "endAt": "2026-02-15T23:20:00Z"
   },
   {
+    "id": "100",
     "artist": "CRYSTAL THOMAS & LUCA GIORDANO",
-    "dia": 2,
+    "day": 2,
     "stage": "La Casita del Blues",
     "startAt": "2026-02-15T23:40:00Z",
     "endAt": "2026-02-16T00:30:00Z"
   },
   {
+    "id": "101",
     "artist": "NINA PORTELA",
-    "dia": 2,
+    "day": 2,
     "stage": "La Casita del Blues",
     "startAt": "2026-02-16T00:45:00Z",
     "endAt": "2026-02-16T01:25:00Z"
   },
   {
+    "id": "102",
     "artist": "XIME MONZÓN",
-    "dia": 2,
+    "day": 2,
     "stage": "La Casita del Blues",
     "startAt": "2026-02-16T01:40:00Z",
     "endAt": "2026-02-16T02:20:00Z"
   },
   {
+    "id": "103",
     "artist": "LORETTA SORBELLO",
-    "dia": 2,
+    "day": 2,
     "stage": "La Casita del Blues",
     "startAt": "2026-02-16T02:35:00Z",
     "endAt": "2026-02-16T03:25:00Z"
   },
   {
+    "id": "104",
     "artist": "LOURDES LOURDES",
-    "dia": 2,
+    "day": 2,
     "stage": "La Plaza Electronic Stage",
     "startAt": "2026-02-15T19:00:00Z",
     "endAt": "2026-02-15T20:00:00Z"
   },
   {
+    "id": "105",
     "artist": "GLAUCO DI MAMBRO",
-    "dia": 2,
+    "day": 2,
     "stage": "La Plaza Electronic Stage",
     "startAt": "2026-02-15T20:00:00Z",
     "endAt": "2026-02-15T21:00:00Z"
   },
   {
+    "id": "106",
     "artist": "BRIGADO CREW",
-    "dia": 2,
+    "day": 2,
     "stage": "La Plaza Electronic Stage",
     "startAt": "2026-02-15T21:00:00Z",
     "endAt": "2026-02-15T22:30:00Z"
   },
   {
+    "id": "107",
     "artist": "DEER JADE",
-    "dia": 2,
+    "day": 2,
     "stage": "La Plaza Electronic Stage",
     "startAt": "2026-02-15T22:30:00Z",
     "endAt": "2026-02-16T00:00:00Z"
   },
   {
+    "id": "108",
     "artist": "FRANKY WAH",
-    "dia": 2,
+    "day": 2,
     "stage": "La Plaza Electronic Stage",
     "startAt": "2026-02-16T00:00:00Z",
     "endAt": "2026-02-16T01:30:00Z"
   },
   {
+    "id": "109",
     "artist": "KÖLSCH",
-    "dia": 2,
+    "day": 2,
     "stage": "La Plaza Electronic Stage",
     "startAt": "2026-02-16T01:30:00Z",
     "endAt": "2026-02-16T03:00:00Z"
   },
   {
+    "id": "110",
     "artist": "MATIAS TANZMANN",
-    "dia": 2,
+    "day": 2,
     "stage": "La Plaza Electronic Stage",
     "startAt": "2026-02-16T03:00:00Z",
     "endAt": "2026-02-16T05:00:00Z"
   },
   {
+    "id": "111",
     "artist": "GOLDEN FLOYD",
-    "dia": 2,
+    "day": 2,
     "stage": "Sorpresa",
     "startAt": "2026-02-15T18:50:00Z",
     "endAt": "2026-02-15T19:40:00Z"
   },
   {
+    "id": "112",
     "artist": "SORPRESA",
-    "dia": 2,
+    "day": 2,
     "stage": "Sorpresa",
     "startAt": "2026-02-15T20:10:00Z",
     "endAt": "2026-02-15T21:00:00Z"
   },
   {
+    "id": "113",
     "artist": "AGARRATE CATALINA",
-    "dia": 2,
+    "day": 2,
     "stage": "Sorpresa",
     "startAt": "2026-02-16T01:20:00Z",
     "endAt": "2026-02-16T02:20:00Z"

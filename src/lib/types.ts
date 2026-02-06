@@ -1,7 +1,7 @@
 export interface RawEvent {
+  id: string;
   artist: string;
-  day?: number;
-  dia?: number;
+  day: number;
   stage: string;
   startAt: string;
   endAt: string;
