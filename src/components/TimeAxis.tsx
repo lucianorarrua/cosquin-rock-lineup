@@ -3,7 +3,7 @@ import { PX_PER_MINUTE } from '../lib/constants';
 // ─── Time Axis (left column labels) ───────────────────────────────
 
 function formatHour(normalizedMin: number): string {
-  const totalMin = normalizedMin + 13 * 60; // add back grid base (14:00)
+  const totalMin = normalizedMin + 14 * 60; // add back grid base (14:00)
   const h = Math.floor(totalMin / 60) % 24;
   const m = totalMin % 60;
   return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
