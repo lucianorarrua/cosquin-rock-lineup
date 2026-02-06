@@ -5,15 +5,12 @@ import { generateICS } from '../lib/data';
 import {
   CopyIcon,
   ShareIcon,
-  XIcon,
   CalendarIcon,
   CheckIcon,
   DownloadIcon,
   EditIcon,
   ChevronDownIcon,
-  MessageCircleIcon,
   ImageIcon,
-  InstagramIcon,
 } from './Icons';
 import Toast from './Toast';
 import AgendaImagePreview from './AgendaImagePreview';
@@ -28,7 +25,6 @@ interface ActionPanelProps {
   schedules: ScheduleInfo[];
   showOnlySelected: boolean;
   onToggleShowOnlySelected: () => void;
-  isMobile: boolean;
 }
 
 export function ActionPanel({
@@ -39,7 +35,6 @@ export function ActionPanel({
   schedules,
   showOnlySelected,
   onToggleShowOnlySelected,
-  isMobile,
 }: ActionPanelProps) {
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState('');
@@ -98,32 +93,6 @@ export function ActionPanel({
       setTimeout(() => setCopied(false), 2000);
       setIsShareMenuOpen(false);
     }
-  }, [shareUrl]);
-
-  const handleShareWhatsApp = useCallback(() => {
-    const text = encodeURIComponent(shareText);
-    window.open(`https://wa.me/?text=${text}`, '_blank');
-    setIsShareMenuOpen(false);
-  }, [shareText]);
-
-  const handleShareX = useCallback(() => {
-    const text = encodeURIComponent(
-      `¡Mi agenda para el Cosquín Rock 2026! 🎸🔥`
-    );
-    const url = encodeURIComponent(shareUrl);
-    window.open(
-      `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
-      '_blank'
-    );
-    setIsShareMenuOpen(false);
-  }, [shareUrl]);
-
-  const handleShareInstagram = useCallback(() => {
-    const text = encodeURIComponent(
-      `¡Mirá mi agenda para el Cosquín Rock 2026! 🎸🔥\n${shareUrl}`
-    );
-    window.open(`https://instagram.com/direct/new/?text=${text}`, '_blank');
-    setIsShareMenuOpen(false);
   }, [shareUrl]);
 
   const handleExportICS = useCallback(() => {
@@ -188,11 +157,6 @@ export function ActionPanel({
   const handleNativeShare = useCallback(async () => {
     if (selectedEvents.length === 0) return;
 
-    if (!('share' in navigator)) {
-      handleShareWhatsApp();
-      return;
-    }
-
     setIsExportingImage(true);
     setIsShareMenuOpen(false);
 
@@ -200,13 +164,21 @@ export function ActionPanel({
       const blob = await generateAgendaImage();
       if (!blob) return;
 
-      const file = new File([blob], 'mi-agenda-cosquin-rock-2026.png', {
+      const timestamp = new Date()
+        .toISOString()
+        .replace(/[:.]/g, '-')
+        .slice(0, 19);
+      const fileName = `mi-agenda-cosquin-rock-2026-${timestamp}.png`;
+
+      const file = new File([blob], fileName, {
         type: 'image/png',
       });
 
-      if (navigator.canShare && !navigator.canShare({ files: [file] })) {
+      if (
+        !('share' in navigator) ||
+        (navigator.canShare && !navigator.canShare({ files: [file] }))
+      ) {
         downloadAgendaImage(blob);
-        handleShareWhatsApp();
         return;
       }
 
@@ -223,7 +195,13 @@ export function ActionPanel({
     } finally {
       setIsExportingImage(false);
     }
-  }, [selectedEvents, generateAgendaImage, downloadAgendaImage, handleShareWhatsApp, shareText, shareUrl]);
+  }, [
+    selectedEvents,
+    generateAgendaImage,
+    downloadAgendaImage,
+    shareText,
+    shareUrl,
+  ]);
 
   if (readOnly) {
     return (
@@ -236,59 +214,38 @@ export function ActionPanel({
         </div>
 
         <div className="action-menus" ref={menuRef}>
-          {isMobile ? (
+          <div className="menu-container">
             <button
               className="btn-primary"
-              onClick={handleNativeShare}
-              disabled={isExportingImage}
+              onClick={() => {
+                setIsShareMenuOpen(!isShareMenuOpen);
+                setIsExportMenuOpen(false);
+              }}
+              aria-haspopup="true"
+              aria-expanded={isShareMenuOpen}
             >
               <ShareIcon />
-              {isExportingImage ? 'Generando...' : 'Compartir'}
+              Compartir
+              <ChevronDownIcon />
             </button>
-          ) : (
-            <div className="menu-container">
-              <button
-                className="btn-primary"
-                onClick={() => {
-                  setIsShareMenuOpen(!isShareMenuOpen);
-                  setIsExportMenuOpen(false);
-                }}
-                aria-haspopup="true"
-                aria-expanded={isShareMenuOpen}
-              >
-                <ShareIcon />
-                Compartir
-                <ChevronDownIcon />
-              </button>
 
-              {isShareMenuOpen && (
-                <div className="dropdown-menu">
-                  <button onClick={handleCopy} className="menu-item">
-                    {copied ? <CheckIcon /> : <CopyIcon />}
-                    {copied ? 'Copiado al portapapeles' : 'Copiar enlace'}
-                  </button>
-                  <button
-                    onClick={handleShareWhatsApp}
-                    className="menu-item"
-                  >
-                    <MessageCircleIcon />
-                    Enviar por WhatsApp
-                  </button>
-                  <button
-                    onClick={handleShareInstagram}
-                    className="menu-item"
-                  >
-                    <InstagramIcon />
-                    Enviar por Instagram
-                  </button>
-                  <button onClick={handleShareX} className="menu-item">
-                    <XIcon />
-                    Compartir en X
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
+            {isShareMenuOpen && (
+              <div className="dropdown-menu">
+                <button onClick={handleCopy} className="menu-item">
+                  {copied ? <CheckIcon /> : <CopyIcon />}
+                  {copied ? 'Copiado al portapapeles' : 'Copiar enlace'}
+                </button>
+                <button
+                  onClick={handleNativeShare}
+                  className="menu-item"
+                  disabled={isExportingImage}
+                >
+                  <ShareIcon />
+                  {isExportingImage ? 'Generando...' : 'Compartir con imagen'}
+                </button>
+              </div>
+            )}
+          </div>
 
           <div className="menu-container">
             <button
@@ -374,59 +331,38 @@ export function ActionPanel({
       </div>
 
       <div className="action-menus" ref={menuRef}>
-        {isMobile ? (
+        <div className="menu-container">
           <button
             className="btn-primary"
-            onClick={handleNativeShare}
-            disabled={isExportingImage}
+            onClick={() => {
+              setIsShareMenuOpen(!isShareMenuOpen);
+              setIsExportMenuOpen(false);
+            }}
+            aria-haspopup="true"
+            aria-expanded={isShareMenuOpen}
           >
             <ShareIcon />
-            {isExportingImage ? 'Generando...' : 'Compartir'}
+            Compartir
+            <ChevronDownIcon />
           </button>
-        ) : (
-          <div className="menu-container">
-            <button
-              className="btn-primary"
-              onClick={() => {
-                setIsShareMenuOpen(!isShareMenuOpen);
-                setIsExportMenuOpen(false);
-              }}
-              aria-haspopup="true"
-              aria-expanded={isShareMenuOpen}
-            >
-              <ShareIcon />
-              Compartir
-              <ChevronDownIcon />
-            </button>
 
-            {isShareMenuOpen && (
-              <div className="dropdown-menu">
-                <button onClick={handleCopy} className="menu-item">
-                  {copied ? <CheckIcon /> : <CopyIcon />}
-                  {copied ? 'Copiado al portapapeles' : 'Copiar enlace'}
-                </button>
-                <button
-                  onClick={handleShareWhatsApp}
-                  className="menu-item"
-                >
-                  <MessageCircleIcon />
-                  Enviar por WhatsApp
-                </button>
-                <button
-                  onClick={handleShareInstagram}
-                  className="menu-item"
-                >
-                  <InstagramIcon />
-                  Enviar por Instagram
-                </button>
-                <button onClick={handleShareX} className="menu-item">
-                  <XIcon />
-                  Compartir en X
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+          {isShareMenuOpen && (
+            <div className="dropdown-menu">
+              <button onClick={handleCopy} className="menu-item">
+                {copied ? <CheckIcon /> : <CopyIcon />}
+                {copied ? 'Copiado al portapapeles' : 'Copiar enlace'}
+              </button>
+              <button
+                onClick={handleNativeShare}
+                className="menu-item"
+                disabled={isExportingImage}
+              >
+                <ShareIcon />
+                {isExportingImage ? 'Generando...' : 'Compartir con imagen'}
+              </button>
+            </div>
+          )}
+        </div>
 
         <div className="menu-container">
           <button

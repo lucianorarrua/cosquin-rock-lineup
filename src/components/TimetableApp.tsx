@@ -199,7 +199,6 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
         }))}
         showOnlySelected={showOnlySelected}
         onToggleShowOnlySelected={() => setShowOnlySelected((prev) => !prev)}
-        isMobile={isMobile}
       />
 
       {/* Mobile Timeline View */}
