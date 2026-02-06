@@ -31,13 +31,13 @@
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
-    "Segoe UI",
+    'Segoe UI',
     Roboto,
     Oxygen,
     Ubuntu,
     Cantarell,
     sans-serif;
-  --font-heading: "Impact", "Arial Black", sans-serif;
+  --font-heading: 'Impact', 'Arial Black', sans-serif;
 }
 
 *,
@@ -170,7 +170,7 @@ main {
   background: var(--color-surface-alt);
 }
 
-.day-tab[aria-selected="true"] {
+.day-tab[aria-selected='true'] {
   background: var(--color-surface-alt);
   color: var(--color-accent);
   border-color: var(--color-border-light);
@@ -476,7 +476,7 @@ main {
 
 /* Minimal stage headers with subtle accent underline */
 .stage-header-inner::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 16px;
@@ -486,28 +486,28 @@ main {
   background: var(--color-border-light);
   opacity: 0.7;
 }
-.stage-header-inner[data-stage="Norte"]::after {
+.stage-header-inner[data-stage='Norte']::after {
   background: var(--stage-norte);
 }
-.stage-header-inner[data-stage="Sur"]::after {
+.stage-header-inner[data-stage='Sur']::after {
   background: var(--stage-sur);
 }
-.stage-header-inner[data-stage="Montaña"]::after {
+.stage-header-inner[data-stage='Montaña']::after {
   background: var(--stage-montana);
 }
-.stage-header-inner[data-stage="Boomerang"]::after {
+.stage-header-inner[data-stage='Boomerang']::after {
   background: var(--stage-boomerang);
 }
-.stage-header-inner[data-stage="Paraguay"]::after {
+.stage-header-inner[data-stage='Paraguay']::after {
   background: var(--stage-paraguay);
 }
-.stage-header-inner[data-stage="La Casita del Blues"]::after {
+.stage-header-inner[data-stage='La Casita del Blues']::after {
   background: var(--stage-casita);
 }
-.stage-header-inner[data-stage="La Plaza Electronic Stage"]::after {
+.stage-header-inner[data-stage='La Plaza Electronic Stage']::after {
   background: var(--stage-plaza);
 }
-.stage-header-inner[data-stage="Sorpresa"]::after {
+.stage-header-inner[data-stage='Sorpresa']::after {
   background: var(--stage-sorpresa);
 }
 
@@ -578,7 +578,7 @@ main {
   outline-offset: 1px;
 }
 
-.event-block[aria-pressed="true"] {
+.event-block[aria-pressed='true'] {
   box-shadow:
     0 0 0 2px var(--color-accent),
     0 4px 12px rgba(234, 179, 8, 0.15);
@@ -602,7 +602,7 @@ main {
   white-space: nowrap;
 }
 
-.event-block[aria-pressed="true"] .event-artist {
+.event-block[aria-pressed='true'] .event-artist {
   color: #fde68a;
 }
 
@@ -614,66 +614,66 @@ main {
   color: var(--color-text-dim);
 }
 
-.event-block[aria-pressed="true"] .event-time {
+.event-block[aria-pressed='true'] .event-time {
   color: rgba(253, 230, 138, 0.7);
 }
 
 /* Stage-specific colors */
-.event-block[data-stage="Norte"] {
+.event-block[data-stage='Norte'] {
   border-color: var(--stage-norte);
   background: rgba(239, 68, 68, 0.15);
 }
-.event-block[data-stage="Sur"] {
+.event-block[data-stage='Sur'] {
   border-color: var(--stage-sur);
   background: rgba(59, 130, 246, 0.15);
 }
-.event-block[data-stage="Montaña"] {
+.event-block[data-stage='Montaña'] {
   border-color: var(--stage-montana);
   background: rgba(16, 185, 129, 0.15);
 }
-.event-block[data-stage="Boomerang"] {
+.event-block[data-stage='Boomerang'] {
   border-color: var(--stage-boomerang);
   background: rgba(245, 158, 11, 0.15);
 }
-.event-block[data-stage="Paraguay"] {
+.event-block[data-stage='Paraguay'] {
   border-color: var(--stage-paraguay);
   background: rgba(168, 85, 247, 0.15);
 }
-.event-block[data-stage="La Casita del Blues"] {
+.event-block[data-stage='La Casita del Blues'] {
   border-color: var(--stage-casita);
   background: rgba(6, 182, 212, 0.15);
 }
-.event-block[data-stage="La Plaza Electronic Stage"] {
+.event-block[data-stage='La Plaza Electronic Stage'] {
   border-color: var(--stage-plaza);
   background: rgba(236, 72, 153, 0.15);
 }
-.event-block[data-stage="Sorpresa"] {
+.event-block[data-stage='Sorpresa'] {
   border-color: var(--stage-sorpresa);
   background: rgba(249, 115, 22, 0.15);
 }
 
-.stage-header-text[data-stage="Norte"] {
+.stage-header-text[data-stage='Norte'] {
   color: var(--stage-norte);
 }
-.stage-header-text[data-stage="Sur"] {
+.stage-header-text[data-stage='Sur'] {
   color: var(--stage-sur);
 }
-.stage-header-text[data-stage="Montaña"] {
+.stage-header-text[data-stage='Montaña'] {
   color: var(--stage-montana);
 }
-.stage-header-text[data-stage="Boomerang"] {
+.stage-header-text[data-stage='Boomerang'] {
   color: var(--stage-boomerang);
 }
-.stage-header-text[data-stage="Paraguay"] {
+.stage-header-text[data-stage='Paraguay'] {
   color: var(--stage-paraguay);
 }
-.stage-header-text[data-stage="La Casita del Blues"] {
+.stage-header-text[data-stage='La Casita del Blues'] {
   color: var(--stage-casita);
 }
-.stage-header-text[data-stage="La Plaza Electronic Stage"] {
+.stage-header-text[data-stage='La Plaza Electronic Stage'] {
   color: var(--stage-plaza);
 }
-.stage-header-text[data-stage="Sorpresa"] {
+.stage-header-text[data-stage='Sorpresa'] {
   color: var(--stage-sorpresa);
 }
 
@@ -711,35 +711,35 @@ main {
   border: 1px solid;
 }
 
-.selected-tag[data-stage="Norte"] {
+.selected-tag[data-stage='Norte'] {
   border-color: var(--stage-norte);
   background: rgba(239, 68, 68, 0.15);
 }
-.selected-tag[data-stage="Sur"] {
+.selected-tag[data-stage='Sur'] {
   border-color: var(--stage-sur);
   background: rgba(59, 130, 246, 0.15);
 }
-.selected-tag[data-stage="Montaña"] {
+.selected-tag[data-stage='Montaña'] {
   border-color: var(--stage-montana);
   background: rgba(16, 185, 129, 0.15);
 }
-.selected-tag[data-stage="Boomerang"] {
+.selected-tag[data-stage='Boomerang'] {
   border-color: var(--stage-boomerang);
   background: rgba(245, 158, 11, 0.15);
 }
-.selected-tag[data-stage="Paraguay"] {
+.selected-tag[data-stage='Paraguay'] {
   border-color: var(--stage-paraguay);
   background: rgba(168, 85, 247, 0.15);
 }
-.selected-tag[data-stage="La Casita del Blues"] {
+.selected-tag[data-stage='La Casita del Blues'] {
   border-color: var(--stage-casita);
   background: rgba(6, 182, 212, 0.15);
 }
-.selected-tag[data-stage="La Plaza Electronic Stage"] {
+.selected-tag[data-stage='La Plaza Electronic Stage'] {
   border-color: var(--stage-plaza);
   background: rgba(236, 72, 153, 0.15);
 }
-.selected-tag[data-stage="Sorpresa"] {
+.selected-tag[data-stage='Sorpresa'] {
   border-color: var(--stage-sorpresa);
   background: rgba(249, 115, 22, 0.15);
 }
@@ -809,7 +809,7 @@ main {
     flex-direction: row;
     gap: 0.5rem;
   }
-  
+
   .footer-attribution span {
     display: inline;
   }
@@ -1010,14 +1010,30 @@ main {
   background: var(--color-text-dim);
 }
 
-.mobile-stage-chip__dot[data-stage="Norte"] { background: var(--stage-norte); }
-.mobile-stage-chip__dot[data-stage="Sur"] { background: var(--stage-sur); }
-.mobile-stage-chip__dot[data-stage="Montaña"] { background: var(--stage-montana); }
-.mobile-stage-chip__dot[data-stage="Boomerang"] { background: var(--stage-boomerang); }
-.mobile-stage-chip__dot[data-stage="Paraguay"] { background: var(--stage-paraguay); }
-.mobile-stage-chip__dot[data-stage="La Casita del Blues"] { background: var(--stage-casita); }
-.mobile-stage-chip__dot[data-stage="La Plaza Electronic Stage"] { background: var(--stage-plaza); }
-.mobile-stage-chip__dot[data-stage="Sorpresa"] { background: var(--stage-sorpresa); }
+.mobile-stage-chip__dot[data-stage='Norte'] {
+  background: var(--stage-norte);
+}
+.mobile-stage-chip__dot[data-stage='Sur'] {
+  background: var(--stage-sur);
+}
+.mobile-stage-chip__dot[data-stage='Montaña'] {
+  background: var(--stage-montana);
+}
+.mobile-stage-chip__dot[data-stage='Boomerang'] {
+  background: var(--stage-boomerang);
+}
+.mobile-stage-chip__dot[data-stage='Paraguay'] {
+  background: var(--stage-paraguay);
+}
+.mobile-stage-chip__dot[data-stage='La Casita del Blues'] {
+  background: var(--stage-casita);
+}
+.mobile-stage-chip__dot[data-stage='La Plaza Electronic Stage'] {
+  background: var(--stage-plaza);
+}
+.mobile-stage-chip__dot[data-stage='Sorpresa'] {
+  background: var(--stage-sorpresa);
+}
 
 /* ─── Mobile Timeline ────────────────────────────────────────────── */
 .mobile-timeline {
@@ -1128,7 +1144,9 @@ main {
 .mobile-event-card--selected {
   border-color: var(--color-accent);
   background: var(--color-accent-dim);
-  box-shadow: 0 0 0 1px var(--color-accent), 0 4px 16px rgba(234, 179, 8, 0.1);
+  box-shadow:
+    0 0 0 1px var(--color-accent),
+    0 4px 16px rgba(234, 179, 8, 0.1);
 }
 
 .mobile-event-card__accent {
@@ -1137,14 +1155,30 @@ main {
   background: var(--color-border);
 }
 
-.mobile-event-card__accent[data-stage="Norte"] { background: var(--stage-norte); }
-.mobile-event-card__accent[data-stage="Sur"] { background: var(--stage-sur); }
-.mobile-event-card__accent[data-stage="Montaña"] { background: var(--stage-montana); }
-.mobile-event-card__accent[data-stage="Boomerang"] { background: var(--stage-boomerang); }
-.mobile-event-card__accent[data-stage="Paraguay"] { background: var(--stage-paraguay); }
-.mobile-event-card__accent[data-stage="La Casita del Blues"] { background: var(--stage-casita); }
-.mobile-event-card__accent[data-stage="La Plaza Electronic Stage"] { background: var(--stage-plaza); }
-.mobile-event-card__accent[data-stage="Sorpresa"] { background: var(--stage-sorpresa); }
+.mobile-event-card__accent[data-stage='Norte'] {
+  background: var(--stage-norte);
+}
+.mobile-event-card__accent[data-stage='Sur'] {
+  background: var(--stage-sur);
+}
+.mobile-event-card__accent[data-stage='Montaña'] {
+  background: var(--stage-montana);
+}
+.mobile-event-card__accent[data-stage='Boomerang'] {
+  background: var(--stage-boomerang);
+}
+.mobile-event-card__accent[data-stage='Paraguay'] {
+  background: var(--stage-paraguay);
+}
+.mobile-event-card__accent[data-stage='La Casita del Blues'] {
+  background: var(--stage-casita);
+}
+.mobile-event-card__accent[data-stage='La Plaza Electronic Stage'] {
+  background: var(--stage-plaza);
+}
+.mobile-event-card__accent[data-stage='Sorpresa'] {
+  background: var(--stage-sorpresa);
+}
 
 .mobile-event-card__body {
   flex: 1;
@@ -1211,14 +1245,30 @@ main {
   color: var(--color-text-muted);
 }
 
-.mobile-event-card__stage[data-stage="Norte"] { color: var(--stage-norte); }
-.mobile-event-card__stage[data-stage="Sur"] { color: var(--stage-sur); }
-.mobile-event-card__stage[data-stage="Montaña"] { color: var(--stage-montana); }
-.mobile-event-card__stage[data-stage="Boomerang"] { color: var(--stage-boomerang); }
-.mobile-event-card__stage[data-stage="Paraguay"] { color: var(--stage-paraguay); }
-.mobile-event-card__stage[data-stage="La Casita del Blues"] { color: var(--stage-casita); }
-.mobile-event-card__stage[data-stage="La Plaza Electronic Stage"] { color: var(--stage-plaza); }
-.mobile-event-card__stage[data-stage="Sorpresa"] { color: var(--stage-sorpresa); }
+.mobile-event-card__stage[data-stage='Norte'] {
+  color: var(--stage-norte);
+}
+.mobile-event-card__stage[data-stage='Sur'] {
+  color: var(--stage-sur);
+}
+.mobile-event-card__stage[data-stage='Montaña'] {
+  color: var(--stage-montana);
+}
+.mobile-event-card__stage[data-stage='Boomerang'] {
+  color: var(--stage-boomerang);
+}
+.mobile-event-card__stage[data-stage='Paraguay'] {
+  color: var(--stage-paraguay);
+}
+.mobile-event-card__stage[data-stage='La Casita del Blues'] {
+  color: var(--stage-casita);
+}
+.mobile-event-card__stage[data-stage='La Plaza Electronic Stage'] {
+  color: var(--stage-plaza);
+}
+.mobile-event-card__stage[data-stage='Sorpresa'] {
+  color: var(--stage-sorpresa);
+}
 
 /* ─── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 640px) {
@@ -1439,7 +1489,7 @@ main {
   padding: 0.125rem 0.375rem;
   border-radius: 0.25rem;
   font-size: 0.875em;
-  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
 }
 
 .faq-steps {

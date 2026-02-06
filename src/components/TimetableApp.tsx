@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback, useMemo, useRef } from "react";
-import html2canvas from "html2canvas";
-import type { FestivalEvent } from "../lib/types";
-import { generateICS, getEventLocalTime } from "../lib/data";
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import html2canvas from 'html2canvas';
+import type { FestivalEvent } from '../lib/types';
+import { generateICS, getEventLocalTime } from '../lib/data';
 import {
   CopyIcon,
   ShareIcon,
@@ -19,9 +19,9 @@ import {
   ListIcon,
   GridIcon,
   ImageIcon,
-} from "./Icons";
-import Toast from "./Toast";
-import AgendaImagePreview from "./AgendaImagePreview";
+} from './Icons';
+import Toast from './Toast';
+import AgendaImagePreview from './AgendaImagePreview';
 
 // The events arrive from Astro with ISO string dates, so we parse them
 interface SerializedEvent {
@@ -59,29 +59,29 @@ function hydrateEvent(e: SerializedEvent): FestivalEvent {
 // ─── URL State helpers ─────────────────────────────────────────────
 function getSelectedIdsFromURL(): Set<string> {
   const params = new URLSearchParams(window.location.search);
-  const ids = params.get("ids");
+  const ids = params.get('ids');
   if (!ids) return new Set();
-  return new Set(ids.split(",").filter(Boolean));
+  return new Set(ids.split(',').filter(Boolean));
 }
 
 function isReadOnlyFromURL(): boolean {
   const params = new URLSearchParams(window.location.search);
-  return params.get("view") === "shared";
+  return params.get('view') === 'shared';
 }
 
 function updateURL(ids: Set<string>, readOnly: boolean) {
   const url = new URL(window.location.href);
   if (ids.size > 0) {
-    url.searchParams.set("ids", [...ids].join(","));
+    url.searchParams.set('ids', [...ids].join(','));
   } else {
-    url.searchParams.delete("ids");
+    url.searchParams.delete('ids');
   }
   if (readOnly) {
-    url.searchParams.set("view", "shared");
+    url.searchParams.set('view', 'shared');
   } else {
-    url.searchParams.delete("view");
+    url.searchParams.delete('view');
   }
-  window.history.replaceState({}, "", url.toString());
+  window.history.replaceState({}, '', url.toString());
 }
 
 // ─── Constants ─────────────────────────────────────────────────────
@@ -114,7 +114,7 @@ function EventBlock({
       type="button"
       role="gridcell"
       aria-pressed={isSelected}
-      aria-label={`${event.artist}, ${startTime} a ${endTime}, Escenario ${event.stage}${isSelected ? ", seleccionado" : ""}`}
+      aria-label={`${event.artist}, ${startTime} a ${endTime}, Escenario ${event.stage}${isSelected ? ', seleccionado' : ''}`}
       className="event-block"
       data-stage={event.stage}
       style={{ top: `${top}px`, height: `${height}px` }}
@@ -124,10 +124,10 @@ function EventBlock({
     >
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          width: "100%",
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-start',
+          width: '100%',
         }}
       >
         <span className="event-artist">{event.artist}</span>
@@ -150,7 +150,7 @@ function formatHour(normalizedMin: number): string {
   const totalMin = normalizedMin + 13 * 60; // add back grid base (14:00)
   const h = Math.floor(totalMin / 60) % 24;
   const m = totalMin % 60;
-  return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
+  return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
 }
 
 interface TimeAxisProps {
@@ -206,7 +206,7 @@ function ActionPanel({
   schedules,
 }: ActionPanelProps) {
   const [copied, setCopied] = useState(false);
-  const [shareUrl, setShareUrl] = useState("");
+  const [shareUrl, setShareUrl] = useState('');
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   const [isExportMenuOpen, setIsExportMenuOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -216,14 +216,14 @@ function ActionPanel({
 
   const selectedEvents = useMemo(
     () => allEvents.filter((e) => selectedIds.has(e.id)),
-    [allEvents, selectedIds],
+    [allEvents, selectedIds]
   );
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
     const url = new URL(window.location.href);
-    url.searchParams.set("ids", [...selectedIds].join(","));
-    url.searchParams.set("view", "shared");
+    url.searchParams.set('ids', [...selectedIds].join(','));
+    url.searchParams.set('view', 'shared');
     setShareUrl(url.toString());
   }, [selectedIds]);
 
@@ -235,8 +235,8 @@ function ActionPanel({
         setIsExportMenuOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const handleCopy = useCallback(async () => {
@@ -246,11 +246,11 @@ function ActionPanel({
       setTimeout(() => setCopied(false), 2000);
       setIsShareMenuOpen(false);
     } catch {
-      const ta = document.createElement("textarea");
+      const ta = document.createElement('textarea');
       ta.value = shareUrl;
       document.body.appendChild(ta);
       ta.select();
-      document.execCommand("copy");
+      document.execCommand('copy');
       document.body.removeChild(ta);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -260,31 +260,31 @@ function ActionPanel({
 
   const handleShareWhatsApp = useCallback(() => {
     const text = encodeURIComponent(
-      `¡Mirá mi agenda para el Cosquín Rock 2026! 🎸🔥\n${shareUrl}`,
+      `¡Mirá mi agenda para el Cosquín Rock 2026! 🎸🔥\n${shareUrl}`
     );
-    window.open(`https://wa.me/?text=${text}`, "_blank");
+    window.open(`https://wa.me/?text=${text}`, '_blank');
     setIsShareMenuOpen(false);
   }, [shareUrl]);
 
   const handleShareX = useCallback(() => {
     const text = encodeURIComponent(
-      `¡Mi agenda para el Cosquín Rock 2026! 🎸🔥`,
+      `¡Mi agenda para el Cosquín Rock 2026! 🎸🔥`
     );
     const url = encodeURIComponent(shareUrl);
     window.open(
       `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
-      "_blank",
+      '_blank'
     );
     setIsShareMenuOpen(false);
   }, [shareUrl]);
 
   const handleExportICS = useCallback(() => {
     const ics = generateICS(selectedEvents);
-    const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
+    const a = document.createElement('a');
     a.href = url;
-    a.download = "cosquin-rock-2026.ics";
+    a.download = 'cosquin-rock-2026.ics';
     a.click();
     URL.revokeObjectURL(url);
     setIsExportMenuOpen(false);
@@ -294,11 +294,11 @@ function ActionPanel({
   const handleGoogleCalendar = useCallback(() => {
     if (selectedEvents.length === 0) return;
     const ics = generateICS(selectedEvents);
-    const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
+    const a = document.createElement('a');
     a.href = url;
-    a.download = "cosquin-rock-2026.ics";
+    a.download = 'cosquin-rock-2026.ics';
     a.click();
     URL.revokeObjectURL(url);
     setIsExportMenuOpen(false);
@@ -316,18 +316,18 @@ function ActionPanel({
       await new Promise((resolve) => setTimeout(resolve, 150));
 
       const canvas = await html2canvas(agendaImageRef.current, {
-        backgroundColor: "#0a0a0f",
+        backgroundColor: '#0a0a0f',
         scale: 2,
         useCORS: true,
         logging: false,
       });
 
-      const link = document.createElement("a");
-      link.download = "mi-agenda-cosquin-rock-2026.png";
-      link.href = canvas.toDataURL("image/png");
+      const link = document.createElement('a');
+      link.download = 'mi-agenda-cosquin-rock-2026.png';
+      link.href = canvas.toDataURL('image/png');
       link.click();
     } catch (error) {
-      console.error("Error generating image:", error);
+      console.error('Error generating image:', error);
     } finally {
       setIsExportingImage(false);
     }
@@ -363,7 +363,7 @@ function ActionPanel({
               <div className="dropdown-menu">
                 <button onClick={handleCopy} className="menu-item">
                   {copied ? <CheckIcon /> : <CopyIcon />}
-                  {copied ? "Copiado al portapapeles" : "Copiar enlace"}
+                  {copied ? 'Copiado al portapapeles' : 'Copiar enlace'}
                 </button>
                 <button onClick={handleShareWhatsApp} className="menu-item">
                   <MessageCircleIcon />
@@ -408,7 +408,7 @@ function ActionPanel({
                   disabled={isExportingImage}
                 >
                   <ImageIcon />
-                  {isExportingImage ? "Generando..." : "Descargar imagen"}
+                  {isExportingImage ? 'Generando...' : 'Descargar imagen'}
                 </button>
               </div>
             )}
@@ -443,8 +443,8 @@ function ActionPanel({
       <div className="action-status">
         <div className="status-indicator active" />
         <span className="action-panel-text">
-          {selectedIds.size} artista{selectedIds.size !== 1 ? "s" : ""}{" "}
-          seleccionado{selectedIds.size !== 1 ? "s" : ""}
+          {selectedIds.size} artista{selectedIds.size !== 1 ? 's' : ''}{' '}
+          seleccionado{selectedIds.size !== 1 ? 's' : ''}
         </span>
       </div>
 
@@ -468,7 +468,7 @@ function ActionPanel({
             <div className="dropdown-menu">
               <button onClick={handleCopy} className="menu-item">
                 {copied ? <CheckIcon /> : <CopyIcon />}
-                {copied ? "Copiado al portapapeles" : "Copiar enlace"}
+                {copied ? 'Copiado al portapapeles' : 'Copiar enlace'}
               </button>
               <button onClick={handleShareWhatsApp} className="menu-item">
                 <MessageCircleIcon />
@@ -513,7 +513,7 @@ function ActionPanel({
                 disabled={isExportingImage}
               >
                 <ImageIcon />
-                {isExportingImage ? "Generando..." : "Descargar imagen"}
+                {isExportingImage ? 'Generando...' : 'Descargar imagen'}
               </button>
             </div>
           )}
@@ -546,8 +546,8 @@ function useIsMobile(breakpoint = 768) {
     const mq = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
     setIsMobile(mq.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
   }, [breakpoint]);
   return isMobile;
 }
@@ -574,8 +574,8 @@ function MobileEventCard({
     <button
       type="button"
       aria-pressed={isSelected}
-      aria-label={`${event.artist}, ${startTime} a ${endTime}, Escenario ${event.stage}${isSelected ? ", seleccionado" : ""}`}
-      className={`mobile-event-card ${isSelected ? "mobile-event-card--selected" : ""}`}
+      aria-label={`${event.artist}, ${startTime} a ${endTime}, Escenario ${event.stage}${isSelected ? ', seleccionado' : ''}`}
+      className={`mobile-event-card ${isSelected ? 'mobile-event-card--selected' : ''}`}
       data-stage={event.stage}
       onClick={() => !readOnly && onToggle(event.id)}
       disabled={readOnly}
@@ -622,7 +622,7 @@ function StageFilter({ stages, activeStage, onSelect }: StageFilterProps) {
       </div>
       <div className="mobile-stage-filter__chips" ref={scrollRef}>
         <button
-          className={`mobile-stage-chip ${activeStage === null ? "mobile-stage-chip--active" : ""}`}
+          className={`mobile-stage-chip ${activeStage === null ? 'mobile-stage-chip--active' : ''}`}
           onClick={() => onSelect(null)}
         >
           Todos
@@ -630,7 +630,7 @@ function StageFilter({ stages, activeStage, onSelect }: StageFilterProps) {
         {stages.map((stage) => (
           <button
             key={stage}
-            className={`mobile-stage-chip ${activeStage === stage ? "mobile-stage-chip--active" : ""}`}
+            className={`mobile-stage-chip ${activeStage === stage ? 'mobile-stage-chip--active' : ''}`}
             data-stage={stage}
             onClick={() => onSelect(activeStage === stage ? null : stage)}
           >
@@ -653,7 +653,7 @@ function groupEventsByHour(events: FestivalEvent[]): TimeGroup[] {
 
   for (const event of events) {
     const time = getEventLocalTime(event.startAt);
-    const hour = time.split(":")[0] + ":00";
+    const hour = time.split(':')[0] + ':00';
     if (!groups.has(hour)) {
       groups.set(hour, []);
     }
@@ -697,12 +697,12 @@ function MobileTimelineView({
 
   const stageNames = useMemo(
     () => schedule.stages.map((s) => s.name),
-    [schedule.stages],
+    [schedule.stages]
   );
 
   const allEvents = useMemo(
     () => schedule.stages.flatMap((s) => s.events),
-    [schedule.stages],
+    [schedule.stages]
   );
 
   const filteredEvents = useMemo(
@@ -710,12 +710,12 @@ function MobileTimelineView({
       activeStage
         ? allEvents.filter((e) => e.stage === activeStage)
         : allEvents,
-    [allEvents, activeStage],
+    [allEvents, activeStage]
   );
 
   const timeGroups = useMemo(
     () => groupEventsByHour(filteredEvents),
-    [filteredEvents],
+    [filteredEvents]
   );
 
   // Count selected per stage for the filter badge
@@ -731,7 +731,7 @@ function MobileTimelineView({
 
   const totalSelected = useMemo(
     () => allEvents.filter((e) => selectedIds.has(e.id)).length,
-    [allEvents, selectedIds],
+    [allEvents, selectedIds]
   );
 
   return (
@@ -748,7 +748,7 @@ function MobileTimelineView({
         <div className="mobile-timeline__stats">
           <CheckIcon size={14} />
           <span>
-            {totalSelected} artista{totalSelected !== 1 ? "s" : ""} en tu agenda
+            {totalSelected} artista{totalSelected !== 1 ? 's' : ''} en tu agenda
           </span>
         </div>
       )}
@@ -796,12 +796,12 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [readOnly, setReadOnly] = useState(false);
   const [activeDay, setActiveDay] = useState(1);
-  const [viewMode, setViewMode] = useState<"auto" | "grid" | "list">("auto");
+  const [viewMode, setViewMode] = useState<'auto' | 'grid' | 'list'>('auto');
   const isMobile = useIsMobile();
 
   // Determine effective view
   const showMobileView =
-    viewMode === "list" || (viewMode === "auto" && isMobile);
+    viewMode === 'list' || (viewMode === 'auto' && isMobile);
 
   // Hydrate from URL on mount
   useEffect(() => {
@@ -834,9 +834,9 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
   const allEvents = useMemo(
     () =>
       schedules.flatMap((s) =>
-        s.stages.flatMap((st) => st.events.map(hydrateEvent)),
+        s.stages.flatMap((st) => st.events.map(hydrateEvent))
       ),
-    [schedules],
+    [schedules]
   );
 
   // Also hydrate events for the current schedule rendering
@@ -849,7 +849,7 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
           events: st.events.map(hydrateEvent),
         })),
       })),
-    [schedules],
+    [schedules]
   );
 
   const currentSchedule =
@@ -871,7 +871,7 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
   }, [currentSchedule.startMinute, currentSchedule.endMinute]);
 
   return (
-    <div style={{ width: "100%", maxWidth: "100vw" }}>
+    <div style={{ width: '100%', maxWidth: '100vw' }}>
       {/* Day Tabs */}
       <div className="day-tabs" role="tablist" aria-label="Días del festival">
         {hydratedSchedules.map((s) => (
@@ -892,17 +892,17 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
       {isMobile && (
         <div className="mobile-view-toggle">
           <button
-            className={`mobile-view-toggle__btn ${showMobileView ? "mobile-view-toggle__btn--active" : ""}`}
-            onClick={() => setViewMode(showMobileView ? "grid" : "list")}
+            className={`mobile-view-toggle__btn ${showMobileView ? 'mobile-view-toggle__btn--active' : ''}`}
+            onClick={() => setViewMode(showMobileView ? 'grid' : 'list')}
             aria-label={
               showMobileView
-                ? "Cambiar a vista grilla"
-                : "Cambiar a vista lista"
+                ? 'Cambiar a vista grilla'
+                : 'Cambiar a vista lista'
             }
-            title={showMobileView ? "Ver grilla" : "Ver lista"}
+            title={showMobileView ? 'Ver grilla' : 'Ver lista'}
           >
             {showMobileView ? <GridIcon size={16} /> : <ListIcon size={16} />}
-            {showMobileView ? "Ver grilla" : "Ver timeline"}
+            {showMobileView ? 'Ver grilla' : 'Ver timeline'}
           </button>
         </div>
       )}
@@ -999,9 +999,9 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
           <h3 className="selected-title">
             <span
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
               }}
             >
               <CheckIcon /> Tu agenda ({selectedIds.size})

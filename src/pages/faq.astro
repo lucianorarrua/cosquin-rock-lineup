@@ -4,121 +4,191 @@ import Footer from '../components/Footer.astro';
 ---
 
 <html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Preguntas Frecuentes — Cosquín Rock 2026</title>
-		<meta name="description" content="Preguntas frecuentes sobre cómo usar tu agenda personalizada del Cosquín Rock 2026." />
-		<meta name="theme-color" content="#0a0a0f" />
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preguntas Frecuentes — Cosquín Rock 2026</title>
+    <meta
+      name="description"
+      content="Preguntas frecuentes sobre cómo usar tu agenda personalizada del Cosquín Rock 2026."
+    />
+    <meta name="theme-color" content="#0a0a0f" />
 
-		<!-- PWA Manifest -->
-		<link rel="manifest" href="/manifest.json" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-		<meta name="apple-mobile-web-app-title" content="Cosquín Rock" />
-	</head>
-	<body>
-		<div class="app-container">
-			<!-- Header -->
-			<header class="header">
-				<a href="/" class="header-logo-link">
-					<img
-						src="/logo.webp"
-						alt="Cosquín Rock 2026"
-						class="header-logo"
-						width="200"
-						height="80"
-						loading="eager"
-					/>
-				</a>
-				<p class="header-subtitle">Preguntas Frecuentes</p>
-				<p class="header-disclaimer">
-					<a href="/">← Volver a la Grilla</a>
-				</p>
-			</header>
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Cosquín Rock" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Header -->
+      <header class="header">
+        <a href="/" class="header-logo-link">
+          <img
+            src="/logo.webp"
+            alt="Cosquín Rock 2026"
+            class="header-logo"
+            width="200"
+            height="80"
+            loading="eager"
+          />
+        </a>
+        <p class="header-subtitle">Preguntas Frecuentes</p>
+        <p class="header-disclaimer">
+          <a href="/">← Volver a la Grilla</a>
+        </p>
+      </header>
 
-			<!-- Main Content -->
-			<main class="faq-content">
-				<section class="faq-section">
-					<h2 class="faq-heading">¿Cómo uso el archivo .ics descargado?</h2>
-					<div class="faq-answer">
-						<p>Una vez que hayas descargado el archivo .ics con tus artistas seleccionados, podés importarlo a tu calendario favorito:</p>
-						
-						<div class="faq-steps">
-							<div class="faq-step">
-								<h3>Google Calendar (Recomendado)</h3>
-								<ol>
-									<li>Abrí <a href="https://calendar.google.com" target="_blank" rel="noopener">Google Calendar</a></li>
-									<li>En el menú de la izquierda, hacé clic en el <strong>+</strong> junto a "Otros calendarios"</li>
-									<li>Seleccioná <strong>"Importar"</strong></li>
-									<li>Elegí el archivo <code>cosquin-rock-2026.ics</code> que descargaste</li>
-									<li>Seleccioná el calendario donde querés agregar los eventos</li>
-									<li>Hacé clic en <strong>"Importar"</strong></li>
-								</ol>
-							</div>
+      <!-- Main Content -->
+      <main class="faq-content">
+        <section class="faq-section">
+          <h2 class="faq-heading">¿Cómo uso el archivo .ics descargado?</h2>
+          <div class="faq-answer">
+            <p>
+              Una vez que hayas descargado el archivo .ics con tus artistas
+              seleccionados, podés importarlo a tu calendario favorito:
+            </p>
 
-							<div class="faq-step">
-								<h3>Otros Calendarios</h3>
-								<p>La mayoría de las aplicaciones de calendario (Apple Calendar, Outlook, etc.) soportan archivos .ics. Buscá la opción <strong>"Importar"</strong> o <strong>"Abrir archivo"</strong> en tu app y seleccioná el archivo descargado.</p>
-							</div>
-						</div>
+            <div class="faq-steps">
+              <div class="faq-step">
+                <h3>Google Calendar (Recomendado)</h3>
+                <ol>
+                  <li>
+                    Abrí <a
+                      href="https://calendar.google.com"
+                      target="_blank"
+                      rel="noopener">Google Calendar</a>
+                  </li>
+                  <li>
+                    En el menú de la izquierda, hacé clic en el <strong
+                      >+</strong
+                    > junto a "Otros calendarios"
+                  </li>
+                  <li>Seleccioná <strong>"Importar"</strong></li>
+                  <li>
+                    Elegí el archivo <code>cosquin-rock-2026.ics</code> que descargaste
+                  </li>
+                  <li>
+                    Seleccioná el calendario donde querés agregar los eventos
+                  </li>
+                  <li>Hacé clic en <strong>"Importar"</strong></li>
+                </ol>
+              </div>
 
-						<div class="faq-note">
-							<strong>Tip:</strong> Una vez importados, los eventos aparecerán en tu calendario con recordatorios automáticos. ¡No te vas a perder a tus artistas favoritos!
-						</div>
-					</div>
-				</section>
+              <div class="faq-step">
+                <h3>Otros Calendarios</h3>
+                <p>
+                  La mayoría de las aplicaciones de calendario (Apple Calendar,
+                  Outlook, etc.) soportan archivos .ics. Buscá la opción <strong
+                    >"Importar"</strong
+                  > o <strong>"Abrir archivo"</strong> en tu app y seleccioná el archivo
+                  descargado.
+                </p>
+              </div>
+            </div>
 
-				<section class="faq-section">
-					<h2 class="faq-heading">¿Cómo se calculan los horarios de finalización?</h2>
-					<div class="faq-answer">
-						<p>La organización del Cosquín Rock solo publica los <strong>horarios de inicio</strong> de cada artista. Los horarios de finalización que ves en esta grilla son <strong>estimaciones calculadas</strong> para ayudarte a planificar tu recorrido.</p>
+            <div class="faq-note">
+              <strong>Tip:</strong> Una vez importados, los eventos aparecerán en
+              tu calendario con recordatorios automáticos. ¡No te vas a perder a tus
+              artistas favoritos!
+            </div>
+          </div>
+        </section>
 
-						<div class="faq-calculation">
-							<h3>¿Cómo lo calculamos?</h3>
-							<p>Usamos el horario de inicio del siguiente artista y restamos un tiempo de recambio estimado (el tiempo que toma desmontar y montar equipos entre shows):</p>
-							
-							<div class="faq-formula">
-								<code>Hora Fin = Hora Inicio del Siguiente - Tiempo de Recambio</code>
-							</div>
+        <section class="faq-section">
+          <h2 class="faq-heading">
+            ¿Cómo se calculan los horarios de finalización?
+          </h2>
+          <div class="faq-answer">
+            <p>
+              La organización del Cosquín Rock solo publica los <strong
+                >horarios de inicio</strong
+              > de cada artista. Los horarios de finalización que ves en esta grilla
+              son <strong>estimaciones calculadas</strong> para ayudarte a planificar
+              tu recorrido.
+            </p>
 
-							<h3>Tiempos de recambio estimados</h3>
-							<ul>
-								<li><strong>Escenarios Principales</strong> (Norte/Sur/Montaña): 20-30 minutos para headliners, 15 minutos para bandas tempranas</li>
-								<li><strong>Escenarios Temáticos</strong> (Boomerang/Paraguay/Casita): 10-15 minutos</li>
-								<li><strong>Escenarios Electrónicos</strong>: Transición inmediata (0 minutos)</li>
-								<li><strong>Artistas de Cierre</strong>: Duración estimada de 60-90 minutos según importancia</li>
-							</ul>
-						</div>
+            <div class="faq-calculation">
+              <h3>¿Cómo lo calculamos?</h3>
+              <p>
+                Usamos el horario de inicio del siguiente artista y restamos un
+                tiempo de recambio estimado (el tiempo que toma desmontar y
+                montar equipos entre shows):
+              </p>
 
-						<div class="faq-warning">
-							<strong>Importante:</strong> Estos horarios son estimaciones y pueden variar. Te recomendamos llegar unos minutos antes a cada show para no perderte el comienzo.
-						</div>
-					</div>
-				</section>
+              <div class="faq-formula">
+                <code
+                  >Hora Fin = Hora Inicio del Siguiente - Tiempo de Recambio</code
+                >
+              </div>
 
-				<section class="faq-section">
-					<h2 class="faq-heading">¿Puedo modificar mi agenda después de exportarla?</h2>
-					<div class="faq-answer">
-						<p>Sí! Podés volver a <a href="/">la grilla</a>, hacer nuevas selecciones y exportar otra vez. También podés editar los eventos directamente en tu calendario después de importarlos.</p>
-					</div>
-				</section>
+              <h3>Tiempos de recambio estimados</h3>
+              <ul>
+                <li>
+                  <strong>Escenarios Principales</strong> (Norte/Sur/Montaña): 20-30
+                  minutos para headliners, 15 minutos para bandas tempranas
+                </li>
+                <li>
+                  <strong>Escenarios Temáticos</strong> (Boomerang/Paraguay/Casita):
+                  10-15 minutos
+                </li>
+                <li>
+                  <strong>Escenarios Electrónicos</strong>: Transición inmediata
+                  (0 minutos)
+                </li>
+                <li>
+                  <strong>Artistas de Cierre</strong>: Duración estimada de
+                  60-90 minutos según importancia
+                </li>
+              </ul>
+            </div>
 
-				<section class="faq-section">
-					<h2 class="faq-heading">¿Este es el sitio oficial?</h2>
-					<div class="faq-answer">
-						<p>No, esta es una herramienta creada por fans para la comunidad. Para información oficial, visitá <a href="https://cosquinrock.net/" target="_blank" rel="noopener noreferrer">cosquinrock.net</a></p>
-					</div>
-				</section>
-			</main>
+            <div class="faq-warning">
+              <strong>Importante:</strong> Estos horarios son estimaciones y pueden
+              variar. Te recomendamos llegar unos minutos antes a cada show para no
+              perderte el comienzo.
+            </div>
+          </div>
+        </section>
 
-			<!-- Footer -->
-			<Footer />
-		</div>
+        <section class="faq-section">
+          <h2 class="faq-heading">
+            ¿Puedo modificar mi agenda después de exportarla?
+          </h2>
+          <div class="faq-answer">
+            <p>
+              Sí! Podés volver a <a href="/">la grilla</a>, hacer nuevas
+              selecciones y exportar otra vez. También podés editar los eventos
+              directamente en tu calendario después de importarlos.
+            </p>
+          </div>
+        </section>
 
-		<!-- Service Worker Registration (async, non-blocking) -->
-		<script src="/register-sw.js" defer></script>
-	</body>
+        <section class="faq-section">
+          <h2 class="faq-heading">¿Este es el sitio oficial?</h2>
+          <div class="faq-answer">
+            <p>
+              No, esta es una herramienta creada por fans para la comunidad.
+              Para información oficial, visitá <a
+                href="https://cosquinrock.net/"
+                target="_blank"
+                rel="noopener noreferrer">cosquinrock.net</a>
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <Footer />
+    </div>
+
+    <!-- Service Worker Registration (async, non-blocking) -->
+    <script src="/register-sw.js" defer></script>
+  </body>
 </html>

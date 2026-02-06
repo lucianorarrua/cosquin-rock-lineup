@@ -1,7 +1,7 @@
 /**
  * Service Worker para Cosquín Rock 2026
  * Estrategia: Stale-While-Revalidate (Cache-First con actualización en segundo plano)
- * 
+ *
  * Objetivo: Funcionar en entornos con redes muy limitadas o sin conexión.
  * - Si hay caché disponible, se sirve inmediatamente (instantáneo)
  * - En paralelo, se intenta obtener la versión fresca de la red
@@ -17,7 +17,7 @@ const PRECACHE_ASSETS = [
   '/manifest.json',
   '/favicon.svg',
   '/favicon.ico',
-  '/logo.webp'
+  '/logo.webp',
 ];
 
 // Extensiones de archivos que definitivamente queremos cachear
@@ -31,7 +31,7 @@ const CACHEABLE_EXTENSIONS = [
   '.ico',
   '.svg',
   '.woff2',
-  '.woff'
+  '.woff',
 ];
 
 /**
@@ -41,9 +41,10 @@ const CACHEABLE_EXTENSIONS = [
  */
 self.addEventListener('install', (event) => {
   console.log('[SW] Installing Service Worker...');
-  
+
   event.waitUntil(
-    caches.open(CACHE_NAME)
+    caches
+      .open(CACHE_NAME)
       .then((cache) => {
         console.log('[SW] Pre-caching critical assets...');
         return cache.addAll(PRECACHE_ASSETS);
@@ -66,9 +67,10 @@ self.addEventListener('install', (event) => {
  */
 self.addEventListener('activate', (event) => {
   console.log('[SW] Activating Service Worker...');
-  
+
   event.waitUntil(
-    caches.keys()
+    caches
+      .keys()
       .then((cacheNames) => {
         return Promise.all(
           cacheNames.map((cacheName) => {
@@ -92,33 +94,33 @@ self.addEventListener('activate', (event) => {
  */
 function shouldCache(request) {
   const url = new URL(request.url);
-  
+
   // Solo cachear requests GET
   if (request.method !== 'GET') {
     return false;
   }
-  
+
   // Solo cachear requests del mismo origen
   if (url.origin !== self.location.origin) {
     return false;
   }
-  
+
   // Cachear navegación (páginas HTML)
   if (request.mode === 'navigate') {
     return true;
   }
-  
+
   // Cachear archivos con extensiones conocidas
   const pathname = url.pathname;
-  if (CACHEABLE_EXTENSIONS.some(ext => pathname.endsWith(ext))) {
+  if (CACHEABLE_EXTENSIONS.some((ext) => pathname.endsWith(ext))) {
     return true;
   }
-  
+
   // Cachear archivos de Astro (assets con hash)
   if (pathname.includes('/_astro/')) {
     return true;
   }
-  
+
   return false;
 }
 
@@ -132,7 +134,7 @@ function shouldCache(request) {
 async function staleWhileRevalidate(request) {
   const cache = await caches.open(CACHE_NAME);
   const cachedResponse = await cache.match(request);
-  
+
   // Crear promesa de fetch de red (no await inmediato)
   const networkFetchPromise = fetch(request)
     .then((networkResponse) => {
@@ -148,22 +150,22 @@ async function staleWhileRevalidate(request) {
       console.log('[SW] Network fetch failed for:', request.url, error.message);
       return null;
     });
-  
+
   // Si hay versión cacheada, devolverla inmediatamente
   if (cachedResponse) {
     console.log('[SW] Serving from cache:', request.url);
     // El fetch de red sigue ejecutándose en segundo plano para actualizar el caché
     return cachedResponse;
   }
-  
+
   // Si no hay caché, esperar a la respuesta de red
   console.log('[SW] No cache, fetching from network:', request.url);
   const networkResponse = await networkFetchPromise;
-  
+
   if (networkResponse) {
     return networkResponse;
   }
-  
+
   // Si todo falla, retornar una página de error offline simple
   return new Response(
     `<!DOCTYPE html>
@@ -215,8 +217,8 @@ async function staleWhileRevalidate(request) {
       status: 503,
       statusText: 'Service Unavailable',
       headers: {
-        'Content-Type': 'text/html; charset=utf-8'
-      }
+        'Content-Type': 'text/html; charset=utf-8',
+      },
     }
   );
 }
@@ -227,12 +229,12 @@ async function staleWhileRevalidate(request) {
  */
 self.addEventListener('fetch', (event) => {
   const request = event.request;
-  
+
   // Solo manejar requests que debemos cachear
   if (!shouldCache(request)) {
     return; // Dejar que el navegador maneje normalmente
   }
-  
+
   event.respondWith(staleWhileRevalidate(request));
 });
 
@@ -244,7 +246,7 @@ self.addEventListener('message', (event) => {
   if (event.data === 'skipWaiting') {
     self.skipWaiting();
   }
-  
+
   if (event.data === 'clearCache') {
     caches.delete(CACHE_NAME).then(() => {
       console.log('[SW] Cache cleared by user request.');

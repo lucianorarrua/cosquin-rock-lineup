@@ -1,11 +1,16 @@
-import type { RawEvent, FestivalEvent, DaySchedule, StageColumn } from './types';
+import type {
+  RawEvent,
+  FestivalEvent,
+  DaySchedule,
+  StageColumn,
+} from './types';
 import rawData from '../../data.json';
 
 /**
  * The festival grid starts at 14:00 local time (Argentina, UTC-3).
  * Times after midnight (00:00-06:00) are treated as 24:00-30:00
  * so they render at the bottom of the grid.
- * 
+ *
  * The raw data uses UTC timestamps (Z suffix).
  * Argentina is UTC-3, so we subtract 3 hours to get local time.
  */
@@ -19,15 +24,15 @@ function utcToLocalMinutes(date: Date): number {
   const utcMinutes = date.getUTCMinutes();
   let localHours = utcHours + UTC_OFFSET_HOURS;
   if (localHours < 0) localHours += 24;
-  
+
   let totalMinutes = localHours * 60 + utcMinutes;
-  
+
   // Normalize: if before grid start (14:00), it's after midnight
   // Treat as 24:xx, 25:xx, etc.
   if (totalMinutes < GRID_START_MINUTES) {
     totalMinutes += 24 * 60; // add 24 hours
   }
-  
+
   return totalMinutes;
 }
 
@@ -87,7 +92,7 @@ export function getDaySchedules(): DaySchedule[] {
   return days.map((day) => {
     const dayEvents = events.filter((e) => e.day === day);
     const stageNames = [...new Set(dayEvents.map((e) => e.stage))];
-    
+
     // Sort stages by predefined order
     stageNames.sort((a, b) => {
       const ai = STAGE_ORDER.indexOf(a);
@@ -140,14 +145,21 @@ export function generateGoogleCalendarUrl(event: FestivalEvent): string {
   const start = formatDateForGCal(event.startAt);
   const end = formatDateForGCal(event.endAt);
   const title = encodeURIComponent(`${event.artist} - Cosquín Rock 2026`);
-  const location = encodeURIComponent(`Escenario ${event.stage}, Cosquín Rock, Córdoba, Argentina`);
-  const details = encodeURIComponent(`${event.artist} en el escenario ${event.stage} del Cosquín Rock 2026.`);
-  
+  const location = encodeURIComponent(
+    `Escenario ${event.stage}, Cosquín Rock, Córdoba, Argentina`
+  );
+  const details = encodeURIComponent(
+    `${event.artist} en el escenario ${event.stage} del Cosquín Rock 2026.`
+  );
+
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&location=${location}&details=${details}`;
 }
 
 function formatDateForGCal(date: Date): string {
-  return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  return date
+    .toISOString()
+    .replace(/[-:]/g, '')
+    .replace(/\.\d{3}/, '');
 }
 
 export function generateICS(events: FestivalEvent[]): string {

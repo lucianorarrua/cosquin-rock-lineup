@@ -1,56 +1,64 @@
 /**
  * Script de registro del Service Worker
  * Se ejecuta en el navegador para registrar y gestionar el SW.
- * 
+ *
  * Este script es pequeño y se carga inline para mínimo impacto en performance.
  */
 
-(function() {
+(function () {
   'use strict';
-  
+
   // Solo registrar si el navegador soporta Service Workers
   if (!('serviceWorker' in navigator)) {
     console.log('[App] Service Workers not supported by this browser.');
     return;
   }
-  
+
   // Registrar cuando la página termine de cargar (no bloquear renderizado)
-  window.addEventListener('load', function() {
+  window.addEventListener('load', function () {
     registerServiceWorker();
   });
-  
+
   async function registerServiceWorker() {
     try {
       const registration = await navigator.serviceWorker.register('/sw.js', {
-        scope: '/'
+        scope: '/',
       });
-      
-      console.log('[App] Service Worker registered successfully:', registration.scope);
-      
+
+      console.log(
+        '[App] Service Worker registered successfully:',
+        registration.scope
+      );
+
       // Escuchar cuando hay una nueva versión disponible
       registration.addEventListener('updatefound', () => {
         const newWorker = registration.installing;
-        
+
         if (newWorker) {
           newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+            if (
+              newWorker.state === 'installed' &&
+              navigator.serviceWorker.controller
+            ) {
               // Hay una nueva versión lista - notificar al usuario sutilmente
               showUpdateNotification(newWorker);
             }
           });
         }
       });
-      
+
       // Verificar actualizaciones periódicamente (cada hora)
-      setInterval(() => {
-        registration.update();
-      }, 60 * 60 * 1000);
-      
+      setInterval(
+        () => {
+          registration.update();
+        },
+        60 * 60 * 1000
+      );
     } catch (error) {
       console.error('[App] Service Worker registration failed:', error);
     }
   }
-  
+
   /**
    * Muestra una notificación sutil cuando hay una nueva versión disponible.
    * No fuerza la actualización automáticamente para no interrumpir al usuario.
@@ -108,24 +116,24 @@
         }
       </style>
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     // Auto-ocultar después de 10 segundos si el usuario no interactúa
     setTimeout(() => {
       const el = document.getElementById('sw-update-notification');
       if (el) el.remove();
     }, 10000);
   }
-  
+
   /**
    * Detectar cuando el usuario vuelve online y podría querer refrescar.
    */
-  window.addEventListener('online', function() {
+  window.addEventListener('online', function () {
     console.log('[App] Connection restored. Cache will update in background.');
   });
-  
-  window.addEventListener('offline', function() {
+
+  window.addEventListener('offline', function () {
     console.log('[App] Connection lost. Serving from cache.');
   });
 })();

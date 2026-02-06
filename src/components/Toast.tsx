@@ -9,7 +9,13 @@ interface ToastProps {
   onClose: () => void;
 }
 
-export default function Toast({ message, linkText, linkUrl, duration = 5000, onClose }: ToastProps) {
+export default function Toast({
+  message,
+  linkText,
+  linkUrl,
+  duration = 5000,
+  onClose,
+}: ToastProps) {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -39,8 +45,8 @@ export default function Toast({ message, linkText, linkUrl, duration = 5000, onC
           </a>
         )}
       </div>
-      <button 
-        className="toast-close" 
+      <button
+        className="toast-close"
         onClick={handleClose}
         aria-label="Cerrar notificación"
       >
