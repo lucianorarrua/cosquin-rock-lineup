@@ -44,19 +44,11 @@ Build a highly optimized, static web application for a music festival ("Cosquín
 
 5. **Offline Support (PWA):**
 
-- **Strategy:** Stale-While-Revalidate (Cache-First with background update)
-- **Behavior:**
-  - On first visit: Pages and assets are pre-cached for offline use.
-  - On subsequent visits: Serve cached version immediately (instant load).
-  - In background: Fetch latest version from network and update cache.
-  - If offline: Serve last cached version seamlessly.
-  - If no cache and offline: Show friendly offline message with retry button.
-- **Implementation:**
-  - Service Worker (`public/sw.js`): Handles all caching logic.
-  - Registration script (`public/register-sw.js`): Non-blocking registration after page load.
-  - Web App Manifest (`public/manifest.json`): PWA metadata for installability.
-- **Cache includes:** All HTML pages, CSS, JS, images, and fonts.
-- **Update notification:** Subtle toast when new version is available.
+- **Strategy:** Stale-While-Revalidate (serve cached content instantly, update in background).
+- **Service Worker (`public/sw.js`):** Caches all pages, assets, and fonts. Falls back to offline message if no cache.
+- **Registration script (`public/register-sw.js`):** Non-blocking, registered after page load.
+- **Web App Manifest (`public/manifest.json`):** Enables installability and PWA metadata.
+- **Update notification:** Toast alerts users when new version is available.
 
 **Data Structure:**
 I will provide an array `data.json`. Each object contains:

@@ -300,7 +300,7 @@ const AgendaImagePreview = forwardRef<HTMLDivElement, AgendaImagePreviewProps>(
               color: '#5a5a66',
             }}
           >
-            Generado en cosquin-rock.vercel.app
+            Generado en cosquin-rock-lineup.vercel.app
           </p>
         </div>
       </div>

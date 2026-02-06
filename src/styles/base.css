@@ -1,0 +1,86 @@
+/* ─── CSS Variables & Reset ───────────────────────────────────────── */
+:root {
+  --color-bg: #0a0a0f;
+  --color-surface: #141418;
+  --color-surface-alt: #1c1c22;
+  --color-border: #2a2a35;
+  --color-border-light: #3a3a48;
+  --color-text: #e4e4e8;
+  --color-text-muted: #8a8a96;
+  --color-text-dim: #5a5a66;
+  --color-accent: #eab308;
+  --color-accent-hover: #facc15;
+  --color-accent-dim: rgba(234, 179, 8, 0.15);
+
+  /* Stage colors */
+  --stage-norte: #ef4444;
+  --stage-sur: #3b82f6;
+  --stage-montana: #10b981;
+  --stage-boomerang: #f59e0b;
+  --stage-paraguay: #a855f7;
+  --stage-casita: #06b6d4;
+  --stage-plaza: #ec4899;
+  --stage-sorpresa: #f97316;
+
+  --grid-px-per-min: 2;
+  --grid-col-width: 180px;
+  --grid-time-width: 56px;
+  --grid-header-height: 80px;
+
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+  --font-heading: 'Impact', 'Arial Black', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-bg);
+}
+
+/* ─── Layout ─────────────────────────────────────────────────────── */
+.app-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem; /* Removed bottom padding as footer has its own */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+}
+
+/* ─── Animations ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

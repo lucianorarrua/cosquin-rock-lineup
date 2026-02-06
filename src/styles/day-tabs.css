@@ -1,0 +1,51 @@
+/* ─── Day Tabs ───────────────────────────────────────────────────── */
+.day-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--color-surface);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: 1px solid var(--color-border);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.day-tab {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.day-tab:hover {
+  color: var(--color-text);
+  background: var(--color-surface-alt);
+}
+
+.day-tab[aria-selected='true'] {
+  background: var(--color-surface-alt);
+  color: var(--color-accent);
+  border-color: var(--color-border-light);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 640px) {
+  .day-tabs {
+    justify-content: center;
+  }
+
+  .day-tab {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+}
