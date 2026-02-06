@@ -19,6 +19,8 @@ import {
   GridIcon,
   ImageIcon,
   InstagramIcon,
+  EyeIcon,
+  EyeOffIcon,
 } from './Icons';
 import Toast from './Toast';
 import AgendaImagePreview from './AgendaImagePreview';
@@ -69,7 +71,16 @@ function isReadOnlyFromURL(): boolean {
   return params.get('view') === 'shared';
 }
 
-function updateURL(ids: Set<string>, readOnly: boolean) {
+function isShowOnlySelectedFromURL(): boolean {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('filter') === 'selected';
+}
+
+function updateURL(
+  ids: Set<string>,
+  readOnly: boolean,
+  showOnlySelected: boolean
+) {
   const url = new URL(window.location.href);
   if (ids.size > 0) {
     url.searchParams.set('ids', [...ids].join(','));
@@ -80,6 +91,11 @@ function updateURL(ids: Set<string>, readOnly: boolean) {
     url.searchParams.set('view', 'shared');
   } else {
     url.searchParams.delete('view');
+  }
+  if (showOnlySelected && ids.size > 0) {
+    url.searchParams.set('filter', 'selected');
+  } else {
+    url.searchParams.delete('filter');
   }
   window.history.replaceState({}, '', url.toString());
 }
@@ -196,6 +212,8 @@ interface ActionPanelProps {
   readOnly: boolean;
   onSwitchToEdit: () => void;
   schedules: ScheduleInfo[];
+  showOnlySelected: boolean;
+  onToggleShowOnlySelected: () => void;
 }
 
 function ActionPanel({
@@ -204,6 +222,8 @@ function ActionPanel({
   readOnly,
   onSwitchToEdit,
   schedules,
+  showOnlySelected,
+  onToggleShowOnlySelected,
 }: ActionPanelProps) {
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState('');
@@ -224,6 +244,7 @@ function ActionPanel({
     const url = new URL(window.location.href);
     url.searchParams.set('ids', [...selectedIds].join(','));
     url.searchParams.set('view', 'shared');
+    url.searchParams.set('filter', 'selected');
     setShareUrl(url.toString());
   }, [selectedIds]);
 
@@ -440,6 +461,21 @@ function ActionPanel({
           {selectedIds.size} artista{selectedIds.size !== 1 ? 's' : ''}{' '}
           seleccionado{selectedIds.size !== 1 ? 's' : ''}
         </span>
+        <button
+          className={`btn-toggle-filter ${showOnlySelected ? 'btn-toggle-filter--active' : ''}`}
+          onClick={onToggleShowOnlySelected}
+          aria-pressed={showOnlySelected}
+          title={
+            showOnlySelected
+              ? 'Ver todos los artistas'
+              : 'Ver solo seleccionados'
+          }
+        >
+          {showOnlySelected ? <EyeIcon size={16} /> : <EyeOffIcon size={16} />}
+          <span className="btn-toggle-filter__text">
+            {showOnlySelected ? 'Ver todos' : 'Solo mi agenda'}
+          </span>
+        </button>
       </div>
 
       <div className="action-menus" ref={menuRef}>
@@ -789,6 +825,7 @@ interface TimetableAppProps {
 export default function TimetableApp({ schedules }: TimetableAppProps) {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [readOnly, setReadOnly] = useState(false);
+  const [showOnlySelected, setShowOnlySelected] = useState(false);
   const [activeDay, setActiveDay] = useState(1);
   const [viewMode, setViewMode] = useState<'auto' | 'grid' | 'list'>('auto');
   const isMobile = useIsMobile();
@@ -801,12 +838,13 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
   useEffect(() => {
     setSelectedIds(getSelectedIdsFromURL());
     setReadOnly(isReadOnlyFromURL());
+    setShowOnlySelected(isShowOnlySelectedFromURL());
   }, []);
 
   // Sync to URL on change
   useEffect(() => {
-    updateURL(selectedIds, readOnly);
-  }, [selectedIds, readOnly]);
+    updateURL(selectedIds, readOnly, showOnlySelected);
+  }, [selectedIds, readOnly, showOnlySelected]);
 
   const toggleArtist = useCallback((id: string) => {
     setSelectedIds((prev) => {
@@ -848,8 +886,28 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
 
   const currentSchedule =
     hydratedSchedules.find((s) => s.day === activeDay) ?? hydratedSchedules[0];
+
+  // Filter schedule based on showOnlySelected - hide unselected events and empty stages
+  const filteredSchedule = useMemo(() => {
+    if (!showOnlySelected || selectedIds.size === 0) {
+      return currentSchedule;
+    }
+
+    const filteredStages = currentSchedule.stages
+      .map((stage) => ({
+        ...stage,
+        events: stage.events.filter((event) => selectedIds.has(event.id)),
+      }))
+      .filter((stage) => stage.events.length > 0);
+
+    return {
+      ...currentSchedule,
+      stages: filteredStages,
+    };
+  }, [currentSchedule, showOnlySelected, selectedIds]);
+
   const gridHeight =
-    (currentSchedule.endMinute - currentSchedule.startMinute) * PX_PER_MINUTE;
+    (filteredSchedule.endMinute - filteredSchedule.startMinute) * PX_PER_MINUTE;
 
   // Generate hour grid lines
   const gridLines = useMemo(() => {
@@ -912,16 +970,33 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
           label: s.label,
           date: s.date,
         }))}
+        showOnlySelected={showOnlySelected}
+        onToggleShowOnlySelected={() => setShowOnlySelected((prev) => !prev)}
       />
 
       {/* Mobile Timeline View */}
       {showMobileView ? (
         <MobileTimelineView
-          schedule={currentSchedule}
+          schedule={filteredSchedule}
           selectedIds={selectedIds}
           readOnly={readOnly}
           onToggle={toggleArtist}
         />
+      ) : filteredSchedule.stages.length === 0 && showOnlySelected ? (
+        /* Empty state when filter is active but no selected artists in current day */
+        <div className="empty-filtered-state">
+          <div className="empty-filtered-state__content">
+            <EyeOffIcon size={48} />
+            <h3>No hay artistas seleccionados este día</h3>
+            <p>Tu agenda no tiene artistas del Día {currentSchedule.day}.</p>
+            <button
+              className="btn-secondary"
+              onClick={() => setShowOnlySelected(false)}
+            >
+              Ver todos los artistas
+            </button>
+          </div>
+        </div>
       ) : (
         /* Desktop Timetable Grid */
         <div
@@ -936,14 +1011,14 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
               <div className="time-corner" />
               <div className="time-body" style={{ height: `${gridHeight}px` }}>
                 <TimeAxis
-                  startMinute={currentSchedule.startMinute}
-                  endMinute={currentSchedule.endMinute}
+                  startMinute={filteredSchedule.startMinute}
+                  endMinute={filteredSchedule.endMinute}
                 />
               </div>
             </div>
 
             {/* Stage columns */}
-            {currentSchedule.stages.map((stage) => (
+            {filteredSchedule.stages.map((stage) => (
               <div key={stage.name} className="stage-column">
                 {/* Sticky stage header */}
                 <div className="stage-header">
@@ -964,7 +1039,7 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
                       key={m}
                       className="grid-line"
                       style={{
-                        top: `${(m - currentSchedule.startMinute) * PX_PER_MINUTE}px`,
+                        top: `${(m - filteredSchedule.startMinute) * PX_PER_MINUTE}px`,
                       }}
                     />
                   ))}
@@ -977,7 +1052,7 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
                       isSelected={selectedIds.has(event.id)}
                       readOnly={readOnly}
                       onToggle={toggleArtist}
-                      gridStartMinute={currentSchedule.startMinute}
+                      gridStartMinute={filteredSchedule.startMinute}
                     />
                   ))}
                 </div>
