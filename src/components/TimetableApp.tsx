@@ -927,6 +927,7 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
   const [activeDay, setActiveDay] = useState(1);
   const [viewMode, setViewMode] = useState<'auto' | 'grid' | 'list'>('auto');
   const isMobile = useIsMobile();
+  const hasHydratedRef = useRef(false);
 
   // Determine effective view
   const showMobileView =
@@ -943,10 +944,12 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
     setSelectedIds(getSelectedIdsFromURL());
     setReadOnly(isReadOnlyFromURL());
     setShowOnlySelected(isShowOnlySelectedFromURL());
+    hasHydratedRef.current = true;
   }, [mounted]);
 
   // Sync to URL on change
   useEffect(() => {
+    if (!mounted || !hasHydratedRef.current) return;
     updateURL(selectedIds, readOnly, showOnlySelected);
   }, [selectedIds, readOnly, showOnlySelected]);
 
