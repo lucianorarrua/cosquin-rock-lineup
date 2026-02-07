@@ -241,8 +241,7 @@ export function MobileTimelineView({
           <div className="mobile-empty-filtered-state">
             <div className="mobile-empty-filtered-state__content">
               <EyeOffIcon size={40} />
-              <h3>No hay artistas seleccionados este día</h3>
-              <p>Tu agenda no tiene artistas del día {schedule.day}.</p>
+              <h3>Tu agenda del día {schedule.day} está vacía</h3>
               {allSchedules.length > 0 && onNavigateToDay && (
                 <button
                   className="mobile-btn-next-day"

@@ -217,8 +217,7 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
         <div className="empty-filtered-state">
           <div className="empty-filtered-state__content">
             <EyeOffIcon size={48} />
-            <h3>No hay artistas seleccionados este día</h3>
-            <p>Tu agenda no tiene artistas del día {currentSchedule.day}.</p>
+            <h3>Tu agenda del día {currentSchedule.day} está vacía</h3>
             <button
               className="btn-secondary"
               onClick={() => {
