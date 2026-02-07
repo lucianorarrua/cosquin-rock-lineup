@@ -209,21 +209,52 @@ export function ActionPanel({
     setIsShareMenuOpen(false);
   }, []);
 
+  const copyShareLink = useCallback(
+    async ({ closeMenu = true, showToast = false } = {}) => {
+      let copiedOk = false;
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        copiedOk = true;
+      } catch {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = shareUrl;
+          document.body.appendChild(ta);
+          ta.select();
+          copiedOk = document.execCommand('copy');
+          document.body.removeChild(ta);
+        } catch {
+          copiedOk = false;
+        }
+      }
+
+      if (!copiedOk) throw new Error('copy_failed');
+
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+
+      if (closeMenu) setIsShareMenuOpen(false);
+      if (showToast) {
+        setToastInfo({
+          message: 'Enlace copiado. Podés compartirlo donde quieras.',
+          type: 'success',
+        });
+      }
+    },
+    [shareUrl]
+  );
+
   const handleCopy = useCallback(async () => {
     try {
-      await navigator.clipboard.writeText(shareUrl);
+      await copyShareLink({ closeMenu: true, showToast: true });
     } catch {
-      const ta = document.createElement('textarea');
-      ta.value = shareUrl;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
+      setToastInfo({
+        message:
+          'No se pudo copiar el enlace. Abrí el sitio en Chrome o Safari.',
+        type: 'warning',
+      });
     }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-    setIsShareMenuOpen(false);
-  }, [shareUrl]);
+  }, [copyShareLink]);
 
   const handleExportICS = useCallback(() => {
     const ics = generateICS(selectedEvents);
@@ -302,30 +333,50 @@ export function ActionPanel({
     setIsShareMenuOpen(false);
 
     try {
-      const blob = await generateAgendaImage();
-      if (!blob) return;
+      let blob: Blob | null = null;
+      try {
+        blob = await generateAgendaImage();
+      } catch (error) {
+        console.warn('Error generating image for share:', error);
+      }
 
-      const timestamp = new Date()
-        .toISOString()
-        .replace(/[:.]/g, '-')
-        .slice(0, 19);
-      const fileName = `mi-agenda-cosquin-rock-2026-${timestamp}.png`;
-      const file = new File([blob], fileName, { type: 'image/png' });
+      if (!blob && isInstagramWebView()) {
+        setToastInfo({
+          message:
+            'Instagram bloquea la imagen. Se compartirá solo el enlace. Si falla, abrí el sitio en Chrome o Safari.',
+          type: 'warning',
+        });
+      }
 
-      const canShare =
-        'share' in navigator &&
-        (!navigator.canShare || navigator.canShare({ files: [file] }));
+      if (blob) {
+        const timestamp = new Date()
+          .toISOString()
+          .replace(/[:.]/g, '-')
+          .slice(0, 19);
+        const fileName = `mi-agenda-cosquin-rock-2026-${timestamp}.png`;
+        const file = new File([blob], fileName, { type: 'image/png' });
 
-      if (!canShare) {
+        const canShare =
+          'share' in navigator &&
+          (!navigator.canShare || navigator.canShare({ files: [file] }));
+
+        if (canShare) {
+          await navigator.share({
+            title: shareTitle,
+            text: shareText,
+            url: shareUrl,
+            files: [file],
+          });
+          return;
+        }
+
         downloadAgendaImage(blob);
-        return;
       }
 
       await navigator.share({
         title: shareTitle,
         text: shareText,
         url: shareUrl,
-        files: [file],
       });
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') return;
@@ -349,6 +400,16 @@ export function ActionPanel({
         )
           return;
         console.error('Error sharing:', fallbackError);
+        try {
+          await copyShareLink({ closeMenu: false, showToast: true });
+        } catch (copyError) {
+          console.error('Error copying link:', copyError);
+          setToastInfo({
+            message:
+              'El navegador de Instagram no permite compartir. Abrí el sitio en Chrome o Safari.',
+            type: 'warning',
+          });
+        }
       }
     } finally {
       setProcessingState('idle');
@@ -357,6 +418,7 @@ export function ActionPanel({
     selectedEvents,
     generateAgendaImage,
     downloadAgendaImage,
+    copyShareLink,
     shareText,
     shareUrl,
   ]);
