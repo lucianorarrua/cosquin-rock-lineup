@@ -218,9 +218,23 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
             <p>Tu agenda no tiene artistas del Día {currentSchedule.day}.</p>
             <button
               className="btn-secondary"
-              onClick={() => setShowOnlySelected(false)}
+              onClick={() => {
+                // Find next day or cycle back to first day
+                const currentIndex = hydratedSchedules.findIndex(
+                  (s) => s.day === activeDay
+                );
+                const nextIndex = (currentIndex + 1) % hydratedSchedules.length;
+                setActiveDay(hydratedSchedules[nextIndex].day);
+              }}
             >
-              Ver todos los artistas
+              Ir al Día{' '}
+              {
+                hydratedSchedules[
+                  (hydratedSchedules.findIndex((s) => s.day === activeDay) +
+                    1) %
+                    hydratedSchedules.length
+                ].day
+              }
             </button>
           </div>
         </div>
