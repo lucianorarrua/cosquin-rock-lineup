@@ -6,6 +6,7 @@ import {
   ClockIcon,
   MapPinIcon,
   FilterIcon,
+  EyeOffIcon,
 } from './Icons';
 
 // ─── Mobile Event Card ─────────────────────────────────────────────
@@ -147,6 +148,9 @@ interface MobileTimelineViewProps {
   selectedIds: Set<string>;
   readOnly: boolean;
   onToggle: (id: string) => void;
+  showOnlySelected?: boolean;
+  allSchedules?: { day: number; label: string; date: string }[];
+  onNavigateToDay?: (day: number) => void;
 }
 
 export function MobileTimelineView({
@@ -154,6 +158,9 @@ export function MobileTimelineView({
   selectedIds,
   readOnly,
   onToggle,
+  showOnlySelected = false,
+  allSchedules = [],
+  onNavigateToDay,
 }: MobileTimelineViewProps) {
   const [activeStage, setActiveStage] = useState<string | null>(null);
 
@@ -228,11 +235,42 @@ export function MobileTimelineView({
         ))}
       </div>
 
-      {filteredEvents.length === 0 && (
-        <div className="mobile-timeline__empty">
-          <p>No hay eventos para este filtro.</p>
-        </div>
-      )}
+      {filteredEvents.length === 0 &&
+        (showOnlySelected && selectedIds.size > 0 ? (
+          /* Empty state when filter is active but no selected artists in current day */
+          <div className="mobile-empty-filtered-state">
+            <div className="mobile-empty-filtered-state__content">
+              <EyeOffIcon size={40} />
+              <h3>No hay artistas seleccionados este día</h3>
+              <p>Tu agenda no tiene artistas del día {schedule.day}.</p>
+              {allSchedules.length > 0 && onNavigateToDay && (
+                <button
+                  className="mobile-btn-next-day"
+                  onClick={() => {
+                    const currentIndex = allSchedules.findIndex(
+                      (s) => s.day === schedule.day
+                    );
+                    const nextIndex = (currentIndex + 1) % allSchedules.length;
+                    onNavigateToDay(allSchedules[nextIndex].day);
+                  }}
+                >
+                  Ir al Día{' '}
+                  {
+                    allSchedules[
+                      (allSchedules.findIndex((s) => s.day === schedule.day) +
+                        1) %
+                        allSchedules.length
+                    ].day
+                  }
+                </button>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="mobile-timeline__empty">
+            <p>No hay eventos para este filtro.</p>
+          </div>
+        ))}
     </div>
   );
 }

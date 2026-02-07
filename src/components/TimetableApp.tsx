@@ -208,6 +208,9 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
           selectedIds={selectedIds}
           readOnly={readOnly}
           onToggle={toggleArtist}
+          showOnlySelected={showOnlySelected}
+          allSchedules={hydratedSchedules}
+          onNavigateToDay={setActiveDay}
         />
       ) : filteredSchedule.stages.length === 0 && showOnlySelected ? (
         /* Empty state when filter is active but no selected artists in current day */
@@ -215,7 +218,7 @@ export default function TimetableApp({ schedules }: TimetableAppProps) {
           <div className="empty-filtered-state__content">
             <EyeOffIcon size={48} />
             <h3>No hay artistas seleccionados este día</h3>
-            <p>Tu agenda no tiene artistas del Día {currentSchedule.day}.</p>
+            <p>Tu agenda no tiene artistas del día {currentSchedule.day}.</p>
             <button
               className="btn-secondary"
               onClick={() => {
