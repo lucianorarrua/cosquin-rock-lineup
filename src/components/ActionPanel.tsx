@@ -302,30 +302,50 @@ export function ActionPanel({
     setIsShareMenuOpen(false);
 
     try {
-      const blob = await generateAgendaImage();
-      if (!blob) return;
+      let blob: Blob | null = null;
+      try {
+        blob = await generateAgendaImage();
+      } catch (error) {
+        console.warn('Error generating image for share:', error);
+      }
 
-      const timestamp = new Date()
-        .toISOString()
-        .replace(/[:.]/g, '-')
-        .slice(0, 19);
-      const fileName = `mi-agenda-cosquin-rock-2026-${timestamp}.png`;
-      const file = new File([blob], fileName, { type: 'image/png' });
+      if (!blob && isInstagramWebView()) {
+        setToastInfo({
+          message:
+            'Instagram bloquea la imagen. Se compartirá solo el enlace. Si falla, abrí el sitio en Chrome o Safari.',
+          type: 'warning',
+        });
+      }
 
-      const canShare =
-        'share' in navigator &&
-        (!navigator.canShare || navigator.canShare({ files: [file] }));
+      if (blob) {
+        const timestamp = new Date()
+          .toISOString()
+          .replace(/[:.]/g, '-')
+          .slice(0, 19);
+        const fileName = `mi-agenda-cosquin-rock-2026-${timestamp}.png`;
+        const file = new File([blob], fileName, { type: 'image/png' });
 
-      if (!canShare) {
+        const canShare =
+          'share' in navigator &&
+          (!navigator.canShare || navigator.canShare({ files: [file] }));
+
+        if (canShare) {
+          await navigator.share({
+            title: shareTitle,
+            text: shareText,
+            url: shareUrl,
+            files: [file],
+          });
+          return;
+        }
+
         downloadAgendaImage(blob);
-        return;
       }
 
       await navigator.share({
         title: shareTitle,
         text: shareText,
         url: shareUrl,
-        files: [file],
       });
     } catch (error) {
       if (error instanceof DOMException && error.name === 'AbortError') return;
@@ -349,6 +369,11 @@ export function ActionPanel({
         )
           return;
         console.error('Error sharing:', fallbackError);
+        setToastInfo({
+          message:
+            'El navegador de Instagram no permite compartir. Abrí el sitio en Chrome o Safari.',
+          type: 'warning',
+        });
       }
     } finally {
       setProcessingState('idle');
