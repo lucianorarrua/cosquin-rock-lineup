@@ -121,7 +121,7 @@ function ExportMenuButton({
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
-        <CalendarIcon />
+        <DownloadIcon />
         {isProcessing ? 'Generando...' : 'Exportar'}
         {!isProcessing && <ChevronDownIcon />}
       </button>
@@ -137,7 +137,7 @@ function ExportMenuButton({
             {isProcessing ? 'Generando...' : 'Descargar imagen'}
           </button>
           <button onClick={onExportICS} className="menu-item">
-            <DownloadIcon />
+            <CalendarIcon />
             Descargar archivo ICS
           </button>
         </div>
