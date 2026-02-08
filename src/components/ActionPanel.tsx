@@ -480,7 +480,13 @@ export function ActionPanel({
   if (selectedIds.size === 0) {
     return (
       <div className="action-panel-hint">
-        <p>Seleccioná los artistas en la grilla para armar tu recorrido.</p>
+        <p>
+          Seleccioná los artistas en la grilla para armar tu recorrido y
+          compartilo con tus amigos.
+        </p>
+        <a href="/faq" className="action-panel-hint-link">
+          Conocé más →
+        </a>
       </div>
     );
   }

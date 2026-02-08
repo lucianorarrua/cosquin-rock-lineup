@@ -58,6 +58,21 @@
   color: var(--color-text-muted);
 }
 
+.action-panel-hint-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--color-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.action-panel-hint-link:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
 /* Toggle Filter Group */
 .filter-toggle-group {
   display: inline-flex;
